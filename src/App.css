@@ -1,0 +1,1394 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+
+@keyframes terminal-type-in {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes terminal-caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #0f172a;
+}
+
+.theme-crt {
+  color: #d2ffd2;
+  font-family: "VT323", "Cascadia Mono", "Consolas", monospace;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: 0.2px;
+  background:
+    radial-gradient(circle at center, rgba(35, 70, 42, 0.48), transparent 60%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(72, 255, 72, 0.11) 0 2px,
+      rgba(0, 0, 0, 0) 2px 4px
+    ),
+    linear-gradient(180deg, #0d1910 0%, #031006 100%);
+  border: 3px ridge #8ab08a;
+  box-shadow: 0 0 0 2px #1f3c24, 0 0 24px rgba(46, 255, 46, 0.22) inset;
+}
+
+.theme-c64 {
+  color: #a6a2ff;
+  font-family: "C64 Pro Mono", "Press Start 2P", "Lucida Console", "Consolas",
+    monospace;
+  font-size: 12px;
+  line-height: 1.7;
+  letter-spacing: 0.4px;
+  background: #2b2f88;
+  border: 18px solid #8a90ff;
+  box-shadow: inset 0 0 0 3px #6f74dc;
+}
+
+.controls {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.controls h1 {
+  margin: 0 0 0.5rem;
+  font-size: 1.75rem;
+}
+
+.controls p {
+  margin: 0 0 1rem;
+}
+
+.control-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  margin-bottom: 1rem;
+}
+
+.control-grid label {
+  display: grid;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+
+.control-grid input {
+  width: 100%;
+  max-width: 140px;
+  height: 40px;
+  padding: 0.2rem;
+  border: 1px solid #94a3b8;
+  border-radius: 6px;
+}
+
+.edit-toggle {
+  border: 1px solid #991b1b;
+  border-radius: 8px;
+  padding: 0.45rem 0.85rem;
+  margin-bottom: 0.8rem;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.edit-toggle.off {
+  background: #fee2e2;
+  color: #7f1d1d;
+}
+
+.edit-toggle.on {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.option-toggle {
+  display: grid;
+  gap: 0.4rem;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.option-toggle input[type="checkbox"] {
+  margin-right: 0.45rem;
+}
+
+.option-toggle select {
+  width: 100%;
+  max-width: 260px;
+  border: 1px solid #94a3b8;
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+}
+
+.preview {
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 1rem;
+  overflow-x: clip;
+}
+
+.stack-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.card-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-bottom: 1rem;
+}
+
+.media-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin-bottom: 1rem;
+}
+
+.gallery-strip {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  margin-bottom: 1rem;
+}
+
+.gallery-strip img {
+  width: 100%;
+  height: 100px;
+  object-fit: contain;
+  border: 1px solid #475569;
+  border-radius: 8px;
+  padding: 0.35rem;
+}
+
+.card {
+  border: 1px solid #64748b;
+  border-radius: 10px;
+  padding: 0.9rem;
+}
+
+.card button,
+.preview button,
+.preview input,
+.preview select,
+.preview textarea {
+  border: 1px solid #0f172a;
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+}
+
+.preview button {
+  cursor: pointer;
+}
+
+.preview button:focus,
+.preview input:focus,
+.preview select:focus,
+.preview textarea:focus,
+.preview a:focus,
+.preview summary:focus {
+  outline: none;
+}
+
+.preview button:focus-visible,
+.preview input:focus-visible,
+.preview select:focus-visible,
+.preview textarea:focus-visible,
+.preview a:focus-visible,
+.preview summary:focus-visible {
+  outline: 2px solid #0f172a;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.18);
+}
+
+.form-grid {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-bottom: 1rem;
+}
+
+.advanced-layout {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  margin-bottom: 1rem;
+}
+
+.tab-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.dashboard-grid {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+.command-list {
+  list-style: none;
+  margin: 0.7rem 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.command-list kbd {
+  border: 1px solid #475569;
+  border-radius: 4px;
+  padding: 0.1rem 0.25rem;
+  font-size: 0.9em;
+}
+
+.demo-dialog {
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin: 0;
+  position: static;
+}
+
+.mui-lab {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 1rem;
+  min-width: 0;
+}
+
+.mui-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.library-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  margin-top: 1rem;
+  min-width: 0;
+}
+
+.lib-card {
+  display: grid;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.lib-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  align-items: center;
+  min-width: 0;
+}
+
+.library-grid > *,
+.card-grid > *,
+.media-grid > *,
+.advanced-layout > * {
+  min-width: 0;
+}
+
+.lib-card .MuiTextField-root,
+.mui-lab .MuiTextField-root,
+.lib-card .MuiFormControl-root,
+.mui-lab .MuiFormControl-root,
+.lib-card .ant-input,
+.lib-card .ant-input-affix-wrapper,
+.lib-card .ant-select,
+.lib-card .ant-picker,
+.lib-card .form-control {
+  width: 100%;
+  max-width: 100%;
+}
+
+.lib-card .ant-tabs-nav-wrap,
+.mui-lab .MuiTabs-scroller {
+  overflow-x: auto;
+}
+
+.lib-card .ant-tabs-content-holder,
+.lib-card .MuiAccordion-root,
+.lib-card .card,
+.mui-lab .MuiAccordion-root {
+  min-width: 0;
+}
+
+.mui-lab .MuiSelect-outlined .MuiOutlinedInput-notchedOutline,
+.mui-lab .MuiFormControl-root .MuiOutlinedInput-notchedOutline {
+  border-width: 2px !important;
+}
+
+.mui-lab .MuiSelect-outlined:hover .MuiOutlinedInput-notchedOutline,
+.mui-lab .MuiFormControl-root .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline,
+.mui-lab .MuiSelect-outlined.Mui-focused .MuiOutlinedInput-notchedOutline,
+.mui-lab .MuiFormControl-root .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-width: 3px !important;
+}
+
+.headless-btn {
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 0.35rem 0.65rem;
+  cursor: pointer;
+}
+
+.headless-panel {
+  border: 1px solid #475569;
+  border-radius: 8px;
+  padding: 0.45rem 0.55rem;
+  margin-top: 0.45rem;
+}
+
+.headless-menu {
+  position: relative;
+}
+
+.headless-menu-items {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 0.4rem;
+  padding: 0.45rem;
+  border: 1px solid #475569;
+  border-radius: 8px;
+}
+
+.headless-switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.headless-switch {
+  position: relative;
+  width: 42px;
+  height: 24px;
+  border-radius: 999px;
+  border: 1px solid #334155;
+  transition: background-color 120ms ease;
+}
+
+.headless-switch.off {
+  background: #64748b;
+}
+
+.headless-switch.on {
+  background: #22c55e;
+}
+
+.headless-switch-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff;
+  transition: transform 120ms ease;
+}
+
+.headless-switch.on .headless-switch-thumb {
+  transform: translateX(18px);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.form-grid label,
+.metrics-row label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 600;
+}
+
+.form-grid fieldset {
+  border: 1px solid #334155;
+  border-radius: 8px;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.form-grid .full {
+  grid-column: 1 / -1;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 1rem;
+}
+
+.data-table th,
+.data-table td,
+.data-table caption {
+  border: 1px solid #334155;
+  padding: 0.45rem 0.55rem;
+  text-align: left;
+}
+
+.definition-list {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.25rem 0.75rem;
+}
+
+.metrics-row {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-bottom: 1rem;
+}
+
+.preview pre,
+.preview blockquote,
+.preview details {
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin: 0 0 1rem;
+}
+
+.preview img {
+  max-width: 100%;
+  height: auto;
+  filter: saturate(1.15) contrast(1.05) hue-rotate(-8deg);
+  transform: perspective(700px) rotateX(1.5deg) rotateY(-1deg);
+  transition: filter 180ms ease, transform 180ms ease;
+}
+
+.preview img:hover {
+  filter: saturate(1.28) contrast(1.1) hue-rotate(-14deg);
+  transform: perspective(700px) rotateX(0deg) rotateY(0deg) scale(1.02);
+}
+
+.theme-crt .controls,
+.theme-crt .preview {
+  background:
+    linear-gradient(180deg, #1f2d1f 0%, #121f12 100%);
+  color: #bbffbb;
+  border: 3px groove #8fb58f;
+  border-radius: 0;
+  font-family: inherit;
+}
+
+.theme-crt .controls h1,
+.theme-crt .controls p,
+.theme-crt .preview h2,
+.theme-crt .preview h3,
+.theme-crt .preview p,
+.theme-crt .preview li,
+.theme-crt .preview td,
+.theme-crt .preview th,
+.theme-crt .preview dt,
+.theme-crt .preview dd,
+.theme-crt .preview summary,
+.theme-crt .preview figcaption,
+.theme-crt .preview caption {
+  text-shadow: 0 0 6px rgba(88, 255, 88, 0.28);
+}
+
+.theme-crt .preview button,
+.theme-crt .edit-toggle,
+.theme-crt .option-toggle select {
+  font-family: inherit;
+  background: linear-gradient(180deg, #3d553d 0%, #293a29 100%);
+  color: #deffde;
+  border: 2px outset #a5d3a5;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.theme-crt .preview input,
+.theme-crt .preview select,
+.theme-crt .preview textarea {
+  font-family: inherit;
+  background: linear-gradient(180deg, #17281b 0%, #0f1f13 100%);
+  color: #deffde;
+  border: 2px inset #7eb786;
+  border-radius: 0;
+  box-shadow: inset 1px 1px 0 #0a150d, inset -1px -1px 0 #3c6746;
+}
+
+.theme-crt button,
+.theme-crt input,
+.theme-crt select,
+.theme-crt textarea {
+  font-family: inherit;
+}
+
+.theme-crt .preview button:active,
+.theme-crt .edit-toggle:active {
+  border-style: inset;
+}
+
+.theme-crt .preview button:focus-visible,
+.theme-crt .preview input:focus-visible,
+.theme-crt .preview select:focus-visible,
+.theme-crt .preview textarea:focus-visible,
+.theme-crt .preview a:focus-visible,
+.theme-crt .preview summary:focus-visible {
+  outline-color: #86ff9d;
+  box-shadow: 0 0 0 2px rgba(134, 255, 157, 0.4);
+}
+
+.theme-crt .data-table th,
+.theme-crt .data-table td,
+.theme-crt .data-table caption,
+.theme-crt .preview blockquote,
+.theme-crt .preview details,
+.theme-crt .preview pre,
+.theme-crt .form-grid fieldset,
+.theme-crt .card {
+  border-color: #93c393;
+  border-width: 2px;
+  border-style: groove;
+  border-radius: 0;
+}
+
+.theme-crt .preview img {
+  filter:
+    grayscale(1)
+    sepia(1)
+    hue-rotate(58deg)
+    saturate(8)
+    brightness(0.72)
+    contrast(1.35);
+  transform: perspective(700px) rotateX(2deg) rotateY(-2deg) scale(0.995);
+  mix-blend-mode: screen;
+}
+
+.theme-crt .preview img:hover {
+  filter:
+    grayscale(1)
+    sepia(1)
+    hue-rotate(60deg)
+    saturate(10)
+    brightness(0.78)
+    contrast(1.45);
+}
+
+/* Bootstrap overrides in CRT theme */
+.theme-crt .preview .alert,
+.theme-crt .preview .alert-success,
+.theme-crt .preview .alert-primary,
+.theme-crt .preview .card,
+.theme-crt .preview .card-body,
+.theme-crt .preview .card-title,
+.theme-crt .preview .card-text {
+  background: #1f3525 !important;
+  color: #bbffbb !important;
+  border-color: #86ff9d !important;
+  border-width: 2px !important;
+  border-style: solid !important;
+}
+
+.theme-crt .preview .card .card-body,
+.theme-crt .preview .card .card-title,
+.theme-crt .preview .card .card-text {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.theme-crt .preview .badge {
+  background: #2f5a39 !important;
+  color: #deffde !important;
+}
+
+.theme-crt .preview .nav-tabs {
+  border-bottom-color: #86ff9d !important;
+}
+
+.theme-crt .preview .nav-tabs .nav-link {
+  color: #bbffbb !important;
+  background: #1f3525 !important;
+  border-color: #6ea97c !important;
+}
+
+.theme-crt .preview .nav-tabs .nav-link.active,
+.theme-crt .preview .nav-tabs .nav-link:focus,
+.theme-crt .preview .nav-tabs .nav-link:hover {
+  color: #e4ffe9 !important;
+  background: #2b4a32 !important;
+  border-color: #86ff9d !important;
+}
+
+.theme-crt .preview .btn,
+.theme-crt .preview .btn-primary,
+.theme-crt .preview .btn-outline-light,
+.theme-crt .preview .form-control {
+  border-color: #86ff9d !important;
+}
+
+.theme-crt .preview .btn,
+.theme-crt .preview .btn-primary,
+.theme-crt .preview .btn-outline-light {
+  background: #1f3525 !important;
+  color: #bbffbb !important;
+  border: 2px solid #86ff9d !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+.theme-crt .preview .btn:focus,
+.theme-crt .preview .btn:active,
+.theme-crt .preview .btn:focus-visible,
+.theme-crt .preview .form-control:focus,
+.theme-crt .preview .form-control:active {
+  border-color: #a7ffb6 !important;
+  box-shadow: 0 0 0 2px rgba(134, 255, 157, 0.35) !important;
+  outline: none !important;
+}
+
+/* MUI primary accents override (blue -> CRT green) */
+.theme-crt .MuiTab-root.Mui-selected {
+  color: #bbffbb !important;
+}
+
+.theme-crt .MuiTabs-indicator {
+  background-color: #86ff9d !important;
+}
+
+.theme-crt .MuiSwitch-switchBase.Mui-checked {
+  color: #86ff9d !important;
+}
+
+.theme-crt .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
+  background-color: #49d879 !important;
+  opacity: 1 !important;
+}
+
+.theme-crt .MuiChip-root,
+.theme-crt .MuiChip-label,
+.theme-crt .MuiSwitch-track,
+.theme-crt .MuiSwitch-thumb,
+.theme-crt .MuiSlider-thumb,
+.theme-crt .MuiSlider-valueLabel,
+.theme-crt .MuiSlider-rail,
+.theme-crt .MuiSlider-track {
+  border-radius: 0 !important;
+}
+
+.theme-crt .MuiChip-root {
+  border-width: 2px !important;
+  border-style: solid !important;
+  border-color: #86ff9d !important;
+}
+
+.theme-crt .MuiAccordionSummary-root,
+.theme-crt .MuiAccordionSummary-content,
+.theme-crt .MuiAccordionSummary-expandIconWrapper,
+.theme-crt .MuiTab-root,
+.theme-crt .MuiButtonBase-root {
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+.theme-crt .MuiLinearProgress-root {
+  background-color: #2a4632 !important;
+}
+
+.theme-crt .MuiLinearProgress-bar {
+  background-color: #86ff9d !important;
+}
+
+.theme-c64 .controls,
+.theme-c64 .preview {
+  background: #40318d;
+  color: #8f97ff;
+  border: 3px solid #8f97ff;
+  border-radius: 0;
+  font-family: inherit;
+}
+
+.theme-c64 .controls h1,
+.theme-c64 .controls p,
+.theme-c64 .preview h2,
+.theme-c64 .preview h3,
+.theme-c64 .preview p,
+.theme-c64 .preview li,
+.theme-c64 .preview td,
+.theme-c64 .preview th,
+.theme-c64 .preview dt,
+.theme-c64 .preview dd,
+.theme-c64 .preview summary,
+.theme-c64 .preview figcaption,
+.theme-c64 .preview caption {
+  color: #8f97ff;
+  text-shadow: 1px 1px 0 #30367a;
+}
+
+.theme-c64 .preview button,
+.theme-c64 .edit-toggle,
+.theme-c64 .option-toggle select {
+  font-family: inherit;
+  background: #5c66cd;
+  color: #d3d7ff;
+  border: 2px solid #aab0ff;
+  border-radius: 0;
+  box-shadow: inset 1px 1px 0 #d8dcff, inset -1px -1px 0 #3a438d;
+}
+
+.theme-c64 .preview input,
+.theme-c64 .preview select,
+.theme-c64 .preview textarea {
+  font-family: inherit;
+  background: #4d5ac4;
+  color: #d3d7ff;
+  border: 2px solid #aab0ff;
+  border-radius: 0;
+  box-shadow: inset -1px -1px 0 #d8dcff, inset 1px 1px 0 #3a438d;
+}
+
+.theme-c64 button,
+.theme-c64 input,
+.theme-c64 select,
+.theme-c64 textarea {
+  font-family: inherit;
+}
+
+.theme-c64 .preview button:active,
+.theme-c64 .edit-toggle:active {
+  box-shadow: inset -1px -1px 0 #d8dcff, inset 1px 1px 0 #3a438d;
+}
+
+.theme-c64 .preview button:focus-visible,
+.theme-c64 .preview input:focus-visible,
+.theme-c64 .preview select:focus-visible,
+.theme-c64 .preview textarea:focus-visible,
+.theme-c64 .preview a:focus-visible,
+.theme-c64 .preview summary:focus-visible {
+  outline-color: #d8dcff;
+  box-shadow: 0 0 0 2px rgba(216, 220, 255, 0.45);
+}
+
+.theme-c64 .MuiChip-root,
+.theme-c64 .MuiChip-label,
+.theme-c64 .MuiSwitch-track,
+.theme-c64 .MuiSwitch-thumb,
+.theme-c64 .MuiSlider-thumb,
+.theme-c64 .MuiSlider-valueLabel,
+.theme-c64 .MuiSlider-rail,
+.theme-c64 .MuiSlider-track {
+  border-radius: 0 !important;
+}
+
+.theme-c64 .MuiChip-root {
+  border-width: 2px !important;
+  border-style: solid !important;
+  border-color: #aab0ff !important;
+}
+
+.theme-c64 .MuiAccordionSummary-root,
+.theme-c64 .MuiAccordionSummary-content,
+.theme-c64 .MuiAccordionSummary-expandIconWrapper,
+.theme-c64 .MuiTab-root,
+.theme-c64 .MuiButtonBase-root {
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+.theme-c64 .data-table th,
+.theme-c64 .data-table td,
+.theme-c64 .data-table caption,
+.theme-c64 .preview blockquote,
+.theme-c64 .preview details,
+.theme-c64 .preview pre,
+.theme-c64 .form-grid fieldset,
+.theme-c64 .card,
+.theme-c64 .gallery-strip img,
+.theme-c64 .demo-dialog {
+  border-color: #8f97ff;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 0;
+}
+
+.theme-c64 .preview img {
+  image-rendering: pixelated;
+  filter: saturate(0.9) contrast(1.05) brightness(0.95);
+  transform: none;
+}
+
+.theme-c64 .preview img:hover {
+  filter: saturate(1) contrast(1.1) brightness(1);
+  transform: scale(1.01);
+}
+
+/* Bootstrap overrides in C64 theme */
+.theme-c64 .preview .alert,
+.theme-c64 .preview .alert-success,
+.theme-c64 .preview .alert-primary,
+.theme-c64 .preview .card,
+.theme-c64 .preview .card-body,
+.theme-c64 .preview .card-title,
+.theme-c64 .preview .card-text {
+  background: #4d5ac4 !important;
+  color: #cfd5ff !important;
+  border-color: #aab0ff !important;
+  border-width: 2px !important;
+  border-style: solid !important;
+}
+
+.theme-c64 .preview .card .card-body,
+.theme-c64 .preview .card .card-title,
+.theme-c64 .preview .card .card-text {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.theme-c64 .preview .badge {
+  background: #6f78df !important;
+  color: #eef0ff !important;
+}
+
+.theme-c64 .preview .nav-tabs {
+  border-bottom-color: #aab0ff !important;
+}
+
+.theme-c64 .preview .nav-tabs .nav-link {
+  color: #cfd5ff !important;
+  background: #4d5ac4 !important;
+  border-color: #8f97ff !important;
+}
+
+.theme-c64 .preview .nav-tabs .nav-link.active,
+.theme-c64 .preview .nav-tabs .nav-link:focus,
+.theme-c64 .preview .nav-tabs .nav-link:hover {
+  color: #eef0ff !important;
+  background: #6975db !important;
+  border-color: #c3c8ff !important;
+}
+
+.theme-c64 .preview .btn,
+.theme-c64 .preview .btn-primary,
+.theme-c64 .preview .btn-outline-light,
+.theme-c64 .preview .form-control {
+  border-color: #c3c8ff !important;
+}
+
+.theme-c64 .preview .btn,
+.theme-c64 .preview .btn-primary,
+.theme-c64 .preview .btn-outline-light {
+  background: #4d5ac4 !important;
+  color: #cfd5ff !important;
+  border: 2px solid #aab0ff !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+.theme-c64 .preview .form-control {
+  box-shadow: inset -1px -1px 0 #d8dcff, inset 1px 1px 0 #3a438d !important;
+}
+
+.theme-c64 .preview .btn:focus,
+.theme-c64 .preview .btn:active,
+.theme-c64 .preview .btn:focus-visible,
+.theme-c64 .preview .form-control:focus,
+.theme-c64 .preview .form-control:active {
+  border-color: #eef0ff !important;
+  box-shadow:
+    inset -1px -1px 0 #d8dcff,
+    inset 1px 1px 0 #3a438d,
+    0 0 0 2px rgba(216, 220, 255, 0.42) !important;
+  outline: none !important;
+}
+
+/* Ant Design: darker alert + square switch + themed progress + sunken fields */
+.theme-crt .preview .ant-alert-info {
+  background: #1c2e21 !important;
+  color: #bbffbb !important;
+  border-color: #86ff9d !important;
+  border-width: 2px !important;
+  border-style: solid !important;
+}
+
+.theme-c64 .preview .ant-alert-info {
+  background: #4d5ac4 !important;
+  color: #cfd5ff !important;
+  border-color: #aab0ff !important;
+  border-width: 2px !important;
+  border-style: solid !important;
+}
+
+.theme-crt .preview .ant-switch,
+.theme-c64 .preview .ant-switch {
+  border-radius: 0 !important;
+  height: 22px !important;
+  min-width: 42px !important;
+  line-height: 20px !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+.theme-crt .preview .ant-switch .ant-switch-handle,
+.theme-c64 .preview .ant-switch .ant-switch-handle {
+  border-radius: 0 !important;
+  width: 18px !important;
+  height: 18px !important;
+  top: 0 !important;
+  left: 1px !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+.theme-crt .preview button[role="switch"].ant-switch,
+.theme-c64 .preview button[role="switch"].ant-switch,
+.theme-crt .preview button[role="switch"].ant-switch .ant-switch-inner,
+.theme-c64 .preview button[role="switch"].ant-switch .ant-switch-inner,
+.theme-crt .preview button[role="switch"].ant-switch .ant-switch-handle,
+.theme-c64 .preview button[role="switch"].ant-switch .ant-switch-handle,
+.theme-crt .preview button[role="switch"].ant-switch .ant-switch-handle::before,
+.theme-c64 .preview button[role="switch"].ant-switch .ant-switch-handle::before {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+.theme-crt .preview .ant-btn,
+.theme-crt .preview .ant-btn-default,
+.theme-crt .preview .ant-btn-primary,
+.theme-c64 .preview .ant-btn,
+.theme-c64 .preview .ant-btn-default,
+.theme-c64 .preview .ant-btn-primary {
+  box-shadow: none !important;
+  background-image: none !important;
+  border-radius: 0 !important;
+}
+
+.theme-crt .preview .ant-btn {
+  background: #1f3525 !important;
+  color: #bbffbb !important;
+  border: 2px solid #86ff9d !important;
+}
+
+.theme-c64 .preview .ant-btn {
+  background: #4d5ac4 !important;
+  color: #cfd5ff !important;
+  border: 2px solid #aab0ff !important;
+}
+
+.theme-crt .preview .ant-switch.ant-switch-checked .ant-switch-handle {
+  inset-inline-start: calc(100% - 19px) !important;
+}
+
+.theme-c64 .preview .ant-switch.ant-switch-checked .ant-switch-handle {
+  inset-inline-start: calc(100% - 19px) !important;
+}
+
+.theme-crt .preview .ant-progress .ant-progress-bg,
+.theme-crt .preview .ant-progress .ant-progress-success-bg {
+  background: #86ff9d !important;
+}
+
+.theme-crt .preview .ant-progress .ant-progress-inner {
+  background: #2f4f35 !important;
+}
+
+.theme-crt .preview .ant-slider-handle,
+.theme-crt .preview .ant-slider-handle::before,
+.theme-crt .preview .ant-slider-handle::after {
+  border-radius: 0 !important;
+}
+
+.theme-crt .preview .progress {
+  background-color: #2f4f35 !important;
+  border: 1px solid #86ff9d !important;
+}
+
+.theme-crt .preview .progress-bar {
+  background-color: #86ff9d !important;
+  color: #0a220f !important;
+}
+
+.theme-c64 .preview .ant-progress .ant-progress-bg,
+.theme-c64 .preview .ant-progress .ant-progress-success-bg {
+  background: #aab0ff !important;
+}
+
+.theme-c64 .preview .ant-progress .ant-progress-inner {
+  background: #5964c7 !important;
+}
+
+.theme-c64 .preview .ant-slider-handle,
+.theme-c64 .preview .ant-slider-handle::before,
+.theme-c64 .preview .ant-slider-handle::after {
+  border-radius: 0 !important;
+}
+
+.theme-c64 .preview .progress {
+  background-color: #5964c7 !important;
+  border: 1px solid #aab0ff !important;
+}
+
+.theme-c64 .preview .progress-bar {
+  background-color: #aab0ff !important;
+  color: #30367a !important;
+}
+
+.theme-crt .preview .ant-input,
+.theme-crt .preview .ant-input-affix-wrapper,
+.theme-crt .preview .ant-select-selector,
+.theme-crt .preview .ant-picker,
+.theme-crt .preview .MuiOutlinedInput-root {
+  border-radius: 0 !important;
+  background: #17281b !important;
+  border-color: #86ff9d !important;
+  box-shadow: none !important;
+}
+
+.theme-c64 .preview .ant-input,
+.theme-c64 .preview .ant-input-affix-wrapper,
+.theme-c64 .preview .ant-select-selector,
+.theme-c64 .preview .ant-picker,
+.theme-c64 .preview .MuiOutlinedInput-root {
+  border-radius: 0 !important;
+  background: #4d5ac4 !important;
+  border-color: #aab0ff !important;
+  box-shadow: none !important;
+}
+
+.theme-crt .preview .ant-select-selector,
+.theme-crt .preview .ant-picker,
+.theme-crt .preview .ant-picker-input > input,
+.theme-c64 .preview .ant-select-selector,
+.theme-c64 .preview .ant-picker,
+.theme-c64 .preview .ant-picker-input > input {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.theme-crt .preview .ant-select .ant-select-selection-search-input,
+.theme-c64 .preview .ant-select .ant-select-selection-search-input,
+.theme-crt .preview .ant-select .ant-select-input,
+.theme-c64 .preview .ant-select .ant-select-input {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.theme-crt .preview .ant-picker .ant-picker-input > input,
+.theme-c64 .preview .ant-picker .ant-picker-input > input {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.theme-crt .preview .ant-picker .ant-picker-input,
+.theme-c64 .preview .ant-picker .ant-picker-input {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.theme-crt .preview .ant-select:not(.ant-select-customize-input) .ant-select-selector,
+.theme-c64 .preview .ant-select:not(.ant-select-customize-input) .ant-select-selector,
+.theme-crt .preview .ant-select-focused .ant-select-selector,
+.theme-c64 .preview .ant-select-focused .ant-select-selector,
+.theme-crt .preview .ant-select-open .ant-select-selector,
+.theme-c64 .preview .ant-select-open .ant-select-selector,
+.theme-crt .preview .ant-select:not(.ant-select-disabled):hover .ant-select-selector,
+.theme-c64 .preview .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+.theme-crt .preview .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  border-width: 2px !important;
+}
+
+.theme-c64 .preview .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  border-width: 2px !important;
+}
+
+.theme-crt .preview .ant-select,
+.theme-c64 .preview .ant-select {
+  border-width: 2px !important;
+  border-style: solid !important;
+}
+
+.theme-crt .preview .ant-select {
+  border-color: #86ff9d !important;
+}
+
+.theme-c64 .preview .ant-select {
+  border-color: #aab0ff !important;
+}
+
+.theme-crt .preview .ant-picker,
+.theme-c64 .preview .ant-picker {
+  border-width: 2px !important;
+  border-style: solid !important;
+}
+
+.theme-crt .preview .ant-picker {
+  border-color: #86ff9d !important;
+}
+
+.theme-c64 .preview .ant-picker {
+  border-color: #aab0ff !important;
+}
+
+.theme-crt .preview .ant-select-dropdown,
+.theme-crt .preview .ant-picker-dropdown,
+.theme-c64 .preview .ant-select-dropdown,
+.theme-c64 .preview .ant-picker-dropdown {
+  border-radius: 0 !important;
+}
+
+.theme-crt .preview .ant-picker-dropdown .ant-btn,
+.theme-c64 .preview .ant-picker-dropdown .ant-btn {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+.theme-crt .preview .ant-picker-dropdown .ant-btn {
+  background: #1f3525 !important;
+  color: #bbffbb !important;
+  border-color: #86ff9d !important;
+}
+
+.theme-c64 .preview .ant-picker-dropdown .ant-btn {
+  background: #4d5ac4 !important;
+  color: #cfd5ff !important;
+  border-color: #aab0ff !important;
+}
+
+.theme-crt .preview .ant-picker-dropdown .ant-picker-panel-layout,
+.theme-crt .preview .ant-picker-dropdown .ant-picker-panel,
+.theme-crt .preview .ant-picker-dropdown .ant-picker-header,
+.theme-crt .preview .ant-picker-dropdown .ant-picker-footer,
+.theme-crt .preview .ant-picker-dropdown .ant-picker-body,
+.theme-crt .preview .ant-picker-dropdown .ant-picker-content th,
+.theme-crt .preview .ant-picker-dropdown .ant-picker-cell-inner,
+.theme-crt .preview .ant-picker-dropdown .ant-picker-header button,
+.theme-crt .preview .ant-picker-dropdown .ant-picker-header-view button,
+.theme-crt .preview .ant-picker-dropdown .ant-picker-now-btn,
+.theme-crt .preview .ant-picker-dropdown .ant-picker-cell {
+  background: #1f3525 !important;
+  color: #bbffbb !important;
+  border-color: #86ff9d !important;
+  border-style: solid !important;
+  border-width: 1px !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.theme-c64 .preview .ant-picker-dropdown .ant-picker-panel-layout,
+.theme-c64 .preview .ant-picker-dropdown .ant-picker-panel,
+.theme-c64 .preview .ant-picker-dropdown .ant-picker-header,
+.theme-c64 .preview .ant-picker-dropdown .ant-picker-footer,
+.theme-c64 .preview .ant-picker-dropdown .ant-picker-body,
+.theme-c64 .preview .ant-picker-dropdown .ant-picker-content th,
+.theme-c64 .preview .ant-picker-dropdown .ant-picker-cell-inner,
+.theme-c64 .preview .ant-picker-dropdown .ant-picker-header button,
+.theme-c64 .preview .ant-picker-dropdown .ant-picker-header-view button,
+.theme-c64 .preview .ant-picker-dropdown .ant-picker-now-btn,
+.theme-c64 .preview .ant-picker-dropdown .ant-picker-cell {
+  background: #4d5ac4 !important;
+  color: #cfd5ff !important;
+  border-color: #aab0ff !important;
+  border-style: solid !important;
+  border-width: 1px !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* DatePicker header: remove internal edge clutter */
+.theme-crt .preview .ant-picker-dropdown .ant-picker-header,
+.theme-c64 .preview .ant-picker-dropdown .ant-picker-header,
+.theme-crt .preview .ant-picker-dropdown .ant-picker-header button,
+.theme-c64 .preview .ant-picker-dropdown .ant-picker-header button {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Keep strong borders on month/year selectors */
+.theme-crt .preview .ant-picker-dropdown .ant-picker-header-view .ant-picker-month-btn,
+.theme-crt .preview .ant-picker-dropdown .ant-picker-header-view .ant-picker-year-btn,
+.theme-c64 .preview .ant-picker-dropdown .ant-picker-header-view .ant-picker-month-btn,
+.theme-c64 .preview .ant-picker-dropdown .ant-picker-header-view .ant-picker-year-btn {
+  border: 2px solid currentColor !important;
+}
+
+/* Thicker edge around date numbers */
+.theme-crt .preview .ant-picker-dropdown .ant-picker-cell .ant-picker-cell-inner,
+.theme-c64 .preview .ant-picker-dropdown .ant-picker-cell .ant-picker-cell-inner {
+  border: 2px solid currentColor !important;
+}
+
+/* Remove month/year heading edges */
+.theme-crt .preview .ant-picker-dropdown .ant-picker-header-view .ant-picker-month-btn,
+.theme-crt .preview .ant-picker-dropdown .ant-picker-header-view .ant-picker-year-btn,
+.theme-c64 .preview .ant-picker-dropdown .ant-picker-header-view .ant-picker-month-btn,
+.theme-c64 .preview .ant-picker-dropdown .ant-picker-header-view .ant-picker-year-btn {
+  border: none !important;
+}
+
+/* Hide date-table grid edges (not number boxes) */
+.theme-crt .preview .ant-picker-dropdown .ant-picker-content th,
+.theme-crt .preview .ant-picker-dropdown .ant-picker-cell,
+.theme-crt .preview .ant-picker-dropdown .ant-picker-cell::before {
+  border-color: #1f3525 !important;
+}
+
+.theme-c64 .preview .ant-picker-dropdown .ant-picker-content th,
+.theme-c64 .preview .ant-picker-dropdown .ant-picker-cell,
+.theme-c64 .preview .ant-picker-dropdown .ant-picker-cell::before {
+  border-color: #4d5ac4 !important;
+}
+
+.theme-crt .preview .ant-picker-dropdown .ant-picker-cell-today .ant-picker-cell-inner::before,
+.theme-c64 .preview .ant-picker-dropdown .ant-picker-cell-today .ant-picker-cell-inner::before {
+  border: 1px solid currentColor !important;
+  border-radius: 0 !important;
+}
+
+.theme-crt .preview .ant-select-dropdown .ant-select-item-option-selected,
+.theme-c64 .preview .ant-select-dropdown .ant-select-item-option-selected {
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+.theme-crt .preview .ant-select-dropdown .ant-select-item,
+.theme-c64 .preview .ant-select-dropdown .ant-select-item,
+.theme-crt .preview .ant-select-dropdown .ant-select-item-option,
+.theme-c64 .preview .ant-select-dropdown .ant-select-item-option {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background-image: none !important;
+}
+
+.theme-crt .preview .ant-select-dropdown .ant-select-item-option-selected {
+  background: #2a3f2d !important;
+  color: #bbffbb !important;
+}
+
+.theme-c64 .preview .ant-select-dropdown .ant-select-item-option-selected {
+  background: #626ed2 !important;
+  color: #eef0ff !important;
+}
+
+.theme-crt .preview .ant-select-selection-item,
+.theme-crt .preview .ant-picker-input > input {
+  color: #bbffbb !important;
+}
+
+.theme-c64 .preview .ant-select-selection-item,
+.theme-c64 .preview .ant-picker-input > input {
+  color: #cfd5ff !important;
+}
+
+.theme-c64 .library-grid {
+  grid-template-columns: 1fr;
+}
+
+.theme-c64 .lib-card {
+  overflow: hidden;
+}
+
+.theme-c64 .lib-card h3 {
+  margin: 0;
+}
+
+.theme-c64 .lib-card :is(
+    .ant-btn,
+    .ant-input,
+    .ant-select-selector,
+    .ant-tabs-tab-btn,
+    .btn,
+    .form-control,
+    .MuiButtonBase-root,
+    .MuiInputBase-input,
+    .MuiTypography-root,
+    .MuiTab-root
+  ) {
+  font-size: 10px !important;
+  line-height: 1.3 !important;
+}
+
+.editable-node {
+  outline: 4px dotted #9ca3af !important;
+  outline-offset: 6px;
+  cursor: grab;
+}
+
+.editable-node:active {
+  cursor: grabbing;
+}
+
+.editable-node::after {
+  content: "";
+  position: absolute;
+  right: -12px;
+  bottom: -12px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #6b7280;
+  background: #e5e7eb;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.terminal-typed {
+  overflow: hidden;
+  white-space: nowrap;
+  display: block;
+  max-width: 100%;
+  clip-path: inset(0 100% 0 0);
+  animation: terminal-type-in var(--type-duration, 6s)
+    steps(var(--chars, 20), end) 1 forwards;
+}
+
+.theme-crt .terminal-heading::after,
+.theme-c64 .terminal-heading::after {
+  content: "_";
+  margin-left: 0.2ch;
+  animation: terminal-caret-blink 0.95s steps(1, end) infinite;
+}
+
+.page,
+.page * {
+  border-radius: 0 !important;
+}
