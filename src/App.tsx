@@ -1,49 +1,110 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 import StyleInjector from "./StyleInjector";
 import heroImage from "./assets/hero.png";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "./assets/vite.svg";
-import { Disclosure, Menu, Switch as HeadlessSwitch } from "@headlessui/react";
+import {
+  Checkbox as HeadlessCheckbox,
+  Combobox as HeadlessCombobox,
+  ComboboxButton as HeadlessComboboxButton,
+  ComboboxInput as HeadlessComboboxInput,
+  ComboboxOption as HeadlessComboboxOption,
+  ComboboxOptions as HeadlessComboboxOptions,
+  Field as HeadlessField,
+  Fieldset as HeadlessFieldset,
+  Input as HeadlessInput,
+  Label as HeadlessLabel,
+  Legend as HeadlessLegend,
+  Disclosure,
+  Listbox as HeadlessListbox,
+  Menu,
+  MenuButton as HeadlessMenuButton,
+  MenuItem as HeadlessMenuItem,
+  MenuItems as HeadlessMenuItems,
+  Popover as HeadlessPopover,
+  PopoverButton as HeadlessPopoverButton,
+  PopoverPanel as HeadlessPopoverPanel,
+  RadioGroup as HeadlessRadioGroup,
+  SwitchDescription as HeadlessSwitchDescription,
+  SwitchGroup as HeadlessSwitchGroup,
+  SwitchLabel as HeadlessSwitchLabel,
+  Switch as HeadlessSwitch,
+  Tab as HeadlessTab,
+  TabGroup as HeadlessTabGroup,
+  TabList as HeadlessTabList,
+  TabPanel as HeadlessTabPanel,
+  TabPanels as HeadlessTabPanels,
+  Textarea as HeadlessTextarea,
+} from "@headlessui/react";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Alert,
+  AlertTitle as MuiAlertTitle,
+  Badge as MuiBadge,
   Autocomplete,
   Avatar,
+  Breadcrumbs as MuiBreadcrumbs,
   Button,
   ButtonGroup,
   Checkbox,
   Chip,
-  CircularProgress,
+  Card as MuiCard,
+  CardActions as MuiCardActions,
+  CardContent as MuiCardContent,
+  Divider as MuiDivider,
   FormControlLabel,
   FormGroup,
+  List as MuiList,
+  ListItem as MuiListItem,
+  ListItemText as MuiListItemText,
   LinearProgress,
+  Link as MuiLink,
   Rating,
   Radio,
   RadioGroup,
   MenuItem,
+  Pagination as MuiPagination,
   FormControl,
   InputLabel,
   Select,
+  Skeleton as MuiSkeleton,
   Slider,
+  Snackbar,
+  Stack,
+  Step,
+  StepLabel,
+  Stepper,
   Switch,
   Tab,
+  Table as MuiTable,
+  TableBody as MuiTableBody,
+  TableCell as MuiTableCell,
+  TableContainer as MuiTableContainer,
+  TableHead as MuiTableHead,
+  TableRow as MuiTableRow,
   Tabs,
   ToggleButton,
   ToggleButtonGroup,
   TextField,
+  Tooltip as MuiTooltip,
   Typography,
+  IconButton,
 } from "@mui/material";
 import { ThemeProvider as MuiThemeProvider, createTheme } from "@mui/material/styles";
 import {
   Alert as AntAlert,
+  Badge as AntBadge,
   Checkbox as AntCheckbox,
   Button as AntButton,
+  Collapse as AntCollapse,
   ConfigProvider as AntConfigProvider,
   DatePicker as AntDatePicker,
+  Descriptions as AntDescriptions,
   Divider as AntDivider,
+  Empty as AntEmpty,
   Input as AntInput,
   InputNumber as AntInputNumber,
   Progress as AntProgress,
@@ -51,24 +112,62 @@ import {
   Select as AntSelect,
   Segmented as AntSegmented,
   Slider as AntSlider,
+  Popover as AntPopover,
+  Statistic as AntStatistic,
+  Steps as AntSteps,
   Switch as AntSwitch,
+  Table as AntTable,
   Tag as AntTag,
   Tabs as AntTabs,
+  Timeline as AntTimeline,
+  Tooltip as AntTooltip,
 } from "antd";
 import type { ThemeConfig as AntThemeConfig } from "antd";
 import {
   Accordion as RbAccordion,
   Alert as RbAlert,
   Badge as RbBadge,
+  Breadcrumb as RbBreadcrumb,
   Button as RbButton,
+  ButtonToolbar as RbButtonToolbar,
   Card as RbCard,
+  CloseButton as RbCloseButton,
   Dropdown as RbDropdown,
+  FloatingLabel as RbFloatingLabel,
   Form as RbForm,
+  InputGroup as RbInputGroup,
   ListGroup as RbListGroup,
+  Nav as RbNav,
+  Placeholder as RbPlaceholder,
+  Pagination as RbPagination,
   ProgressBar as RbProgressBar,
+  Tab as RbTab,
+  Table as RbTable,
+  Tabs as RbTabs,
+  Figure as RbFigure,
+  Toast as RbToast,
+  ToastContainer as RbToastContainer,
 } from "react-bootstrap";
 
 type ThemeMode = "default" | "crt" | "c64" | "msdos";
+
+function AsciiSpinner({ label = "loading" }: { label?: string }) {
+  const frames = ["/", "-", "\\", "|"];
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setIndex((current) => (current + 1) % frames.length);
+    }, 90);
+    return () => window.clearInterval(id);
+  }, []);
+
+  return (
+    <span className="ascii-spinner" aria-label={label} title={label}>
+      {frames[index]}
+    </span>
+  );
+}
 
 function App() {
   const [editMode, setEditMode] = useState(false);
@@ -76,13 +175,20 @@ function App() {
   const [theme, setTheme] = useState<ThemeMode>("c64");
   const [textAnimation, setTextAnimation] = useState(true);
   const [muiTab, setMuiTab] = useState(0);
+  const [muiPage, setMuiPage] = useState(2);
   const [muiRating, setMuiRating] = useState<number | null>(3);
   const [muiSlider, setMuiSlider] = useState<number>(40);
   const [muiSelect, setMuiSelect] = useState("beta");
   const [muiAutoValue, setMuiAutoValue] = useState("Gamma");
   const [muiRadio, setMuiRadio] = useState("alpha");
   const [muiToggle, setMuiToggle] = useState("one");
+  const [muiSnackOpen, setMuiSnackOpen] = useState(false);
   const [headlessEnabled, setHeadlessEnabled] = useState(true);
+  const [headlessListboxValue, setHeadlessListboxValue] = useState("starter");
+  const [headlessSelectValue, setHeadlessSelectValue] = useState("Alpha");
+  const [headlessPlanValue, setHeadlessPlanValue] = useState("pro");
+  const [headlessCommand, setHeadlessCommand] = useState("deploy");
+  const [headlessFlag, setHeadlessFlag] = useState(true);
   const [antSlider, setAntSlider] = useState<number>(35);
   const [antRadio, setAntRadio] = useState("alpha");
   const [antSegment, setAntSegment] = useState("Alpha");
@@ -95,6 +201,16 @@ function App() {
   };
 
   const { text: textColor, background: backgroundColor } = themeColors[theme];
+
+  useEffect(() => {
+    const themeClasses = ["theme-default", "theme-crt", "theme-c64", "theme-msdos"];
+    document.body.classList.remove(...themeClasses);
+    document.body.classList.add(`theme-${theme}`);
+
+    return () => {
+      document.body.classList.remove(...themeClasses);
+    };
+  }, [theme]);
 
   const antTheme: AntThemeConfig = useMemo(() => {
     if (theme === "crt") {
@@ -969,6 +1085,7 @@ function App() {
             </p>
             <MuiThemeProvider theme={muiTheme}>
               <Alert severity="success">
+                <MuiAlertTitle>Success</MuiAlertTitle>
                 MUI alert rendered inside StyleInjector
               </Alert>
               <Tabs value={muiTab} onChange={(_, value) => setMuiTab(value)}>
@@ -980,13 +1097,28 @@ function App() {
                 <Chip label="Status chip" />
                 <Chip label="Clickable chip" clickable />
                 <Switch defaultChecked />
-                <Avatar sx={{ width: 26, height: 26 }}>M</Avatar>
+                <MuiBadge badgeContent={4} color="primary">
+                  <Avatar sx={{ width: 26, height: 26 }}>M</Avatar>
+                </MuiBadge>
               </div>
               <ButtonGroup size="small" variant="outlined">
                 <Button>MUI One</Button>
                 <Button>Two</Button>
                 <Button>Three</Button>
               </ButtonGroup>
+              <Stack direction="row" spacing={1}>
+                <IconButton size="small" aria-label="refresh">
+                  R
+                </IconButton>
+                <IconButton size="small" aria-label="settings">
+                  S
+                </IconButton>
+              </Stack>
+              <MuiTooltip title="MUI tooltip preview">
+                <Button size="small" variant="outlined">
+                  Hover tooltip
+                </Button>
+              </MuiTooltip>
               <ToggleButtonGroup
                 size="small"
                 value={muiToggle}
@@ -1041,7 +1173,9 @@ function App() {
                 options={["Alpha", "Beta", "Gamma", "Delta"]}
                 value={muiAutoValue}
                 onChange={(_, value) => setMuiAutoValue(value ?? "Alpha")}
-                renderInput={(params) => <TextField {...params} label="MUI autocomplete" />}
+                renderInput={(params) => (
+                  <TextField {...params} placeholder="MUI autocomplete" />
+                )}
               />
               <div className="mui-row">
                 <label>
@@ -1060,7 +1194,86 @@ function App() {
                 </label>
               </div>
               <LinearProgress variant="determinate" value={68} />
-              <CircularProgress size={30} />
+              <MuiDivider />
+              <AsciiSpinner label="mui loading" />
+              <Stepper activeStep={1} alternativeLabel>
+                <Step>
+                  <StepLabel>Collect</StepLabel>
+                </Step>
+                <Step>
+                  <StepLabel>Validate</StepLabel>
+                </Step>
+                <Step>
+                  <StepLabel>Publish</StepLabel>
+                </Step>
+              </Stepper>
+              <MuiPagination
+                page={muiPage}
+                count={5}
+                onChange={(_, value) => setMuiPage(value)}
+                size="small"
+              />
+              <MuiBreadcrumbs aria-label="mui breadcrumb">
+                <MuiLink underline="hover" href="#">
+                  Home
+                </MuiLink>
+                <MuiLink underline="hover" href="#">
+                  MUI
+                </MuiLink>
+                <Typography color="text.primary">Status</Typography>
+              </MuiBreadcrumbs>
+              <MuiSkeleton variant="text" width="80%" />
+              <MuiSkeleton variant="rectangular" height={18} />
+              <MuiList dense>
+                <MuiListItem>
+                  <MuiListItemText primary="MUI list item alpha" secondary="secondary text" />
+                </MuiListItem>
+                <MuiListItem>
+                  <MuiListItemText primary="MUI list item beta" />
+                </MuiListItem>
+              </MuiList>
+              <MuiTableContainer>
+                <MuiTable size="small">
+                  <MuiTableHead>
+                    <MuiTableRow>
+                      <MuiTableCell>Metric</MuiTableCell>
+                      <MuiTableCell>Status</MuiTableCell>
+                      <MuiTableCell align="right">Value</MuiTableCell>
+                    </MuiTableRow>
+                  </MuiTableHead>
+                  <MuiTableBody>
+                    <MuiTableRow>
+                      <MuiTableCell>Throughput</MuiTableCell>
+                      <MuiTableCell>Stable</MuiTableCell>
+                      <MuiTableCell align="right">128/s</MuiTableCell>
+                    </MuiTableRow>
+                    <MuiTableRow>
+                      <MuiTableCell>Errors</MuiTableCell>
+                      <MuiTableCell>Low</MuiTableCell>
+                      <MuiTableCell align="right">0.2%</MuiTableCell>
+                    </MuiTableRow>
+                  </MuiTableBody>
+                </MuiTable>
+              </MuiTableContainer>
+              <MuiCard variant="outlined">
+                <MuiCardContent>
+                  <Typography variant="subtitle2">MUI card block</Typography>
+                  <Typography variant="body2">
+                    Card/content/actions to validate nested theming and borders.
+                  </Typography>
+                </MuiCardContent>
+                <MuiCardActions>
+                  <Button size="small" onClick={() => setMuiSnackOpen(true)}>
+                    Open Snackbar
+                  </Button>
+                </MuiCardActions>
+              </MuiCard>
+              <Snackbar
+                open={muiSnackOpen}
+                autoHideDuration={2200}
+                onClose={() => setMuiSnackOpen(false)}
+                message="MUI snackbar sample"
+              />
             </MuiThemeProvider>
           </section>
 
@@ -1078,6 +1291,11 @@ function App() {
                   <AntButton>Default</AntButton>
                   <AntSwitch defaultChecked />
                   <AntTag>Tag</AntTag>
+                  <AntTooltip title="Ant tooltip sample">
+                    <AntBadge count={5}>
+                      <AntButton>Badge</AntButton>
+                    </AntBadge>
+                  </AntTooltip>
                 </div>
                 <div className="lib-row">
                   <AntCheckbox defaultChecked>Ant check A</AntCheckbox>
@@ -1124,10 +1342,64 @@ function App() {
                   value={antSlider}
                   onChange={(value) => setAntSlider(value)}
                 />
+                <AntSteps
+                  size="small"
+                  current={1}
+                  items={[
+                    { title: "Prepare" },
+                    { title: "Style" },
+                    { title: "Verify" },
+                  ]}
+                />
+                <AntPopover content="Ant popover sample" trigger="click">
+                  <AntButton>Open Popover</AntButton>
+                </AntPopover>
+                <div className="lib-row">
+                  <AntStatistic title="Ant stat" value={1128} />
+                  <AntEmpty description="No records" image={AntEmpty.PRESENTED_IMAGE_SIMPLE} />
+                </div>
                 <AntDivider style={{ margin: "8px 0" }} />
                 <AntProgress percent={72} />
                 <AntDatePicker
                   getPopupContainer={(trigger) => trigger.parentElement ?? trigger}
+                />
+                <AntCollapse
+                  items={[
+                    {
+                      key: "ant-collapse-1",
+                      label: "Ant collapse panel",
+                      children: "Collapsible Ant Design panel content.",
+                    },
+                  ]}
+                />
+                <AntDescriptions
+                  size="small"
+                  column={1}
+                  items={[
+                    { key: "d1", label: "Host", children: "Node-01" },
+                    { key: "d2", label: "Region", children: "eu-north" },
+                  ]}
+                />
+                <AntTable
+                  size="small"
+                  pagination={false}
+                  rowKey="name"
+                  columns={[
+                    { title: "Name", dataIndex: "name", key: "name" },
+                    { title: "State", dataIndex: "state", key: "state" },
+                    { title: "Score", dataIndex: "score", key: "score" },
+                  ]}
+                  dataSource={[
+                    { name: "Widget A", state: "Ready", score: 88 },
+                    { name: "Widget B", state: "Review", score: 73 },
+                  ]}
+                />
+                <AntTimeline
+                  items={[
+                    { content: "Create project structure" },
+                    { content: "Apply theme overrides" },
+                    { content: "Run compatibility checks" },
+                  ]}
                 />
               </AntConfigProvider>
             </section>
@@ -1151,10 +1423,28 @@ function App() {
                   </RbDropdown.Menu>
                 </RbDropdown>
               </div>
+              <RbButtonToolbar className="mb-2">
+                <RbButton variant="outline-light" size="sm">
+                  Tool A
+                </RbButton>
+                <RbButton variant="outline-light" size="sm">
+                  Tool B
+                </RbButton>
+              </RbButtonToolbar>
               <RbForm.Group className="mb-2">
                 <RbForm.Label>RB input</RbForm.Label>
                 <RbForm.Control placeholder="Type with Bootstrap control" />
               </RbForm.Group>
+              <RbFloatingLabel label="RB floating label" className="mb-2">
+                <RbForm.Control placeholder="floating label input" />
+              </RbFloatingLabel>
+              <RbInputGroup size="sm" className="mb-2">
+                <RbInputGroup.Text>@</RbInputGroup.Text>
+                <RbForm.Control placeholder="RB input group" />
+              </RbInputGroup>
+              <RbPlaceholder as="div" animation="glow">
+                <RbPlaceholder xs={6} />
+              </RbPlaceholder>
               <div className="rb-check-group">
                 <RbForm.Check
                   className="rb-check-line"
@@ -1177,6 +1467,10 @@ function App() {
                 />
               </div>
               <RbProgressBar now={68} label="68%" />
+              <div className="lib-row">
+                <AsciiSpinner label="rb loading one" />
+                <AsciiSpinner label="rb loading two" />
+              </div>
               <RbCard>
                 <RbCard.Body>
                   <RbCard.Title>Bootstrap Card</RbCard.Title>
@@ -1196,6 +1490,72 @@ function App() {
                 <RbListGroup.Item>Item Two</RbListGroup.Item>
                 <RbListGroup.Item>Item Three</RbListGroup.Item>
               </RbListGroup>
+              <RbTable size="sm" bordered>
+                <thead>
+                  <tr>
+                    <th>Entry</th>
+                    <th>Type</th>
+                    <th>Count</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Alpha</td>
+                    <td>Core</td>
+                    <td>14</td>
+                  </tr>
+                  <tr>
+                    <td>Beta</td>
+                    <td>Addon</td>
+                    <td>6</td>
+                  </tr>
+                </tbody>
+              </RbTable>
+              <RbPagination size="sm">
+                <RbPagination.Prev />
+                <RbPagination.Item active>{1}</RbPagination.Item>
+                <RbPagination.Item>{2}</RbPagination.Item>
+                <RbPagination.Next />
+              </RbPagination>
+              <RbBreadcrumb>
+                <RbBreadcrumb.Item href="#">Home</RbBreadcrumb.Item>
+                <RbBreadcrumb.Item href="#">Library</RbBreadcrumb.Item>
+                <RbBreadcrumb.Item active>Bootstrap</RbBreadcrumb.Item>
+              </RbBreadcrumb>
+              <RbTabs defaultActiveKey="rb-home" className="mb-2">
+                <RbTab eventKey="rb-home" title="Home">
+                  Bootstrap tab home content.
+                </RbTab>
+                <RbTab eventKey="rb-profile" title="Profile">
+                  Bootstrap tab profile content.
+                </RbTab>
+              </RbTabs>
+              <RbNav variant="tabs" defaultActiveKey="#home">
+                <RbNav.Item>
+                  <RbNav.Link href="#home">RB Home</RbNav.Link>
+                </RbNav.Item>
+                <RbNav.Item>
+                  <RbNav.Link href="#profile">RB Profile</RbNav.Link>
+                </RbNav.Item>
+              </RbNav>
+              <RbToastContainer position="top-end" className="position-static">
+                <RbToast show>
+                  <RbToast.Header closeButton={false}>
+                    <strong className="me-auto">RB Toast</strong>
+                  </RbToast.Header>
+                  <RbToast.Body>Toast component style check.</RbToast.Body>
+                </RbToast>
+              </RbToastContainer>
+              <RbCloseButton />
+              <RbFigure>
+                <RbFigure.Image
+                  width={120}
+                  height={80}
+                  alt="RB figure preview"
+                  src={heroImage}
+                />
+                <RbFigure.Caption>RB figure/caption style check.</RbFigure.Caption>
+              </RbFigure>
             </section>
 
             <section className="lib-card card">
@@ -1228,24 +1588,32 @@ function App() {
                 )}
               </Disclosure>
               <Menu as="div" className="headless-menu">
-                <Menu.Button className="headless-btn">Menu</Menu.Button>
-                <Menu.Items anchor="bottom" className="headless-menu-items">
-                  <Menu.Item>
-                    <button type="button">Edit</button>
-                  </Menu.Item>
-                  <Menu.Item>
-                    <button type="button">Duplicate</button>
-                  </Menu.Item>
-                  <Menu.Item>
-                    <button type="button">Archive</button>
-                  </Menu.Item>
-                  <Menu.Item>
-                    <button type="button">Delete</button>
-                  </Menu.Item>
-                </Menu.Items>
+                <HeadlessMenuButton className="headless-btn">Menu</HeadlessMenuButton>
+                <HeadlessMenuItems className="headless-menu-items">
+                  <HeadlessMenuItem as="button" type="button">
+                    Edit
+                  </HeadlessMenuItem>
+                  <HeadlessMenuItem as="button" type="button">
+                    Duplicate
+                  </HeadlessMenuItem>
+                  <HeadlessMenuItem as="button" type="button">
+                    Archive
+                  </HeadlessMenuItem>
+                  <HeadlessMenuItem as="button" type="button">
+                    Delete
+                  </HeadlessMenuItem>
+                </HeadlessMenuItems>
               </Menu>
-              <label className="headless-switch-row">
-                Headless switch
+              <HeadlessPopover className="headless-menu">
+                <HeadlessPopoverButton className="headless-btn">
+                  Popover
+                </HeadlessPopoverButton>
+                <HeadlessPopoverPanel anchor="bottom" className="headless-panel">
+                  Headless popover panel content.
+                </HeadlessPopoverPanel>
+              </HeadlessPopover>
+              <HeadlessSwitchGroup as="div" className="headless-switch-row">
+                <HeadlessSwitchLabel>Headless switch</HeadlessSwitchLabel>
                 <HeadlessSwitch
                   checked={headlessEnabled}
                   onChange={setHeadlessEnabled}
@@ -1254,7 +1622,137 @@ function App() {
                   <span className="sr-only">Enable headless switch</span>
                   <span aria-hidden="true" className="headless-switch-thumb" />
                 </HeadlessSwitch>
-              </label>
+                <HeadlessSwitchDescription>Toggle state preview</HeadlessSwitchDescription>
+              </HeadlessSwitchGroup>
+              <div className="headless-picker">
+                <span>Headless listbox</span>
+                <HeadlessListbox
+                  as="div"
+                  className="headless-listbox-root"
+                  value={headlessListboxValue}
+                  onChange={setHeadlessListboxValue}
+                >
+                  <HeadlessListbox.Button className="headless-btn">
+                    {headlessListboxValue}
+                  </HeadlessListbox.Button>
+                  <HeadlessListbox.Options modal={false} className="headless-menu-items">
+                    <HeadlessListbox.Option value="starter">starter</HeadlessListbox.Option>
+                    <HeadlessListbox.Option value="business">business</HeadlessListbox.Option>
+                    <HeadlessListbox.Option value="enterprise">enterprise</HeadlessListbox.Option>
+                  </HeadlessListbox.Options>
+                </HeadlessListbox>
+              </div>
+              <HeadlessRadioGroup
+                value={headlessPlanValue}
+                onChange={setHeadlessPlanValue}
+                className="headless-radio-group"
+              >
+                <HeadlessRadioGroup.Label>Headless radio group</HeadlessRadioGroup.Label>
+                <div className="lib-row">
+                  {["basic", "pro", "max"].map((plan) => (
+                    <HeadlessRadioGroup.Option key={plan} value={plan} className="headless-btn">
+                      {plan}
+                    </HeadlessRadioGroup.Option>
+                  ))}
+                </div>
+              </HeadlessRadioGroup>
+              <HeadlessField className="headless-field">
+                <HeadlessLabel className="headless-label">Headless checkbox</HeadlessLabel>
+                <HeadlessCheckbox
+                  checked={headlessFlag}
+                  onChange={setHeadlessFlag}
+                  className="headless-btn headless-checkbox"
+                >
+                  {headlessFlag ? "enabled" : "disabled"}
+                </HeadlessCheckbox>
+              </HeadlessField>
+              <div className="headless-picker">
+                <span>Headless combobox</span>
+                <HeadlessCombobox
+                  as="div"
+                  className="headless-combobox-root"
+                  value={headlessCommand}
+                  onChange={(value) => setHeadlessCommand(value ?? "deploy")}
+                >
+                  <div className="headless-combobox">
+                    <HeadlessComboboxInput
+                      className="headless-btn"
+                      aria-label="Command"
+                      displayValue={(value: string) => value}
+                    />
+                    <HeadlessComboboxButton
+                      className="headless-combobox-toggle"
+                      aria-label="Toggle command list"
+                    >
+                      v
+                    </HeadlessComboboxButton>
+                  </div>
+                  <HeadlessComboboxOptions modal={false} className="headless-combobox-options">
+                    <HeadlessComboboxOption value="deploy">deploy</HeadlessComboboxOption>
+                    <HeadlessComboboxOption value="rollback">rollback</HeadlessComboboxOption>
+                    <HeadlessComboboxOption value="restart">restart</HeadlessComboboxOption>
+                  </HeadlessComboboxOptions>
+                </HeadlessCombobox>
+                <small>Type or pick a command.</small>
+              </div>
+              <HeadlessField className="headless-field">
+                <HeadlessLabel className="headless-label">Headless select</HeadlessLabel>
+                <HeadlessListbox
+                  as="div"
+                  className="headless-listbox-root"
+                  value={headlessSelectValue}
+                  onChange={setHeadlessSelectValue}
+                >
+                  <HeadlessListbox.Button className="headless-btn">
+                    {headlessSelectValue}
+                  </HeadlessListbox.Button>
+                  <HeadlessListbox.Options modal={false} className="headless-menu-items">
+                    <HeadlessListbox.Option value="Alpha">Alpha</HeadlessListbox.Option>
+                    <HeadlessListbox.Option value="Beta">Beta</HeadlessListbox.Option>
+                    <HeadlessListbox.Option value="Gamma">Gamma</HeadlessListbox.Option>
+                  </HeadlessListbox.Options>
+                </HeadlessListbox>
+              </HeadlessField>
+              <HeadlessField className="headless-field">
+                <HeadlessLabel className="headless-label">Headless text input</HeadlessLabel>
+                <HeadlessInput className="headless-btn" defaultValue="headless input" />
+              </HeadlessField>
+              <HeadlessField className="headless-field">
+                <HeadlessLabel className="headless-label">Headless textarea</HeadlessLabel>
+                <HeadlessTextarea className="headless-btn" defaultValue="headless notes" />
+              </HeadlessField>
+              <HeadlessFieldset className="headless-field">
+                <HeadlessLegend className="headless-label">Headless fieldset</HeadlessLegend>
+                <HeadlessField className="headless-field">
+                  <HeadlessLabel className="headless-label">Alias</HeadlessLabel>
+                  <HeadlessInput className="headless-btn" defaultValue="retro-user" />
+                </HeadlessField>
+              </HeadlessFieldset>
+              <HeadlessTabGroup>
+                <HeadlessTabList className="lib-row">
+                  {["Status", "Logs", "Usage"].map((label) => (
+                    <HeadlessTab
+                      key={label}
+                      className={({ selected }) =>
+                        `headless-btn ${selected ? "headless-btn-active" : ""}`
+                      }
+                    >
+                      {label}
+                    </HeadlessTab>
+                  ))}
+                </HeadlessTabList>
+                <HeadlessTabPanels>
+                  <HeadlessTabPanel className="headless-panel">
+                    Status panel body.
+                  </HeadlessTabPanel>
+                  <HeadlessTabPanel className="headless-panel">
+                    Logs panel body.
+                  </HeadlessTabPanel>
+                  <HeadlessTabPanel className="headless-panel">
+                    Usage panel body.
+                  </HeadlessTabPanel>
+                </HeadlessTabPanels>
+              </HeadlessTabGroup>
             </section>
           </section>
         </section>

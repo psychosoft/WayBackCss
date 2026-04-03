@@ -38,7 +38,7 @@
   color: #0f172a;
 }
 
-.theme-crt {
+.page.theme-crt {
   color: #d2ffd2;
   font-family: "VT323", "Cascadia Mono", "Consolas", monospace;
   font-size: 22px;
@@ -56,7 +56,7 @@
   box-shadow: 0 0 0 2px #1f3c24, 0 0 24px rgba(46, 255, 46, 0.22) inset;
 }
 
-.theme-c64 {
+.page.theme-c64 {
   color: #a6a2ff;
   font-family: "C64 Pro Mono", "Press Start 2P", "Lucida Console", "Consolas",
     monospace;
@@ -390,6 +390,50 @@
   font-size: 1em !important;
 }
 
+.preview .input-group-text,
+.preview .spinner-border,
+.preview .spinner-grow {
+  color: currentColor !important;
+  border-color: currentColor !important;
+}
+
+.preview .toast,
+.preview .toast-header,
+.preview .toast-body,
+.preview .nav-tabs,
+.preview .nav-tabs .nav-link,
+.preview .nav-tabs .nav-link.active {
+  background: transparent !important;
+  color: currentColor !important;
+  border-color: currentColor !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.preview .btn-toolbar {
+  gap: 0.4rem;
+}
+
+.preview .form-floating > label {
+  color: currentColor !important;
+}
+
+.preview .btn-close {
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+.preview .placeholder,
+.preview .placeholder-glow .placeholder {
+  background: currentColor !important;
+  opacity: 0.35 !important;
+}
+
+.preview figure,
+.preview figcaption {
+  color: currentColor !important;
+}
+
 .preview .dropdown-menu {
   border-width: 2px !important;
 }
@@ -439,6 +483,103 @@
 .preview .accordion {
   --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230f172a'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
   --bs-accordion-btn-active-icon: var(--bs-accordion-btn-icon);
+}
+
+.preview .pagination .page-link {
+  border-radius: 0 !important;
+  border: 1px solid currentColor !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  color: currentColor !important;
+}
+
+.preview .pagination .page-item.active .page-link {
+  background: currentColor !important;
+  color: #0f172a !important;
+}
+
+.preview .breadcrumb,
+.preview .breadcrumb-item,
+.preview .breadcrumb-item a,
+.preview .breadcrumb-item.active {
+  color: currentColor !important;
+}
+
+.preview .breadcrumb-item + .breadcrumb-item::before {
+  color: currentColor !important;
+}
+
+.mui-lab .MuiBreadcrumbs-root,
+.mui-lab .MuiBreadcrumbs-root a,
+.mui-lab .MuiBreadcrumbs-root p,
+.mui-lab .MuiBreadcrumbs-separator {
+  color: currentColor !important;
+}
+
+.mui-lab .MuiCard-root,
+.mui-lab .MuiCardContent-root,
+.mui-lab .MuiCardActions-root,
+.mui-lab .MuiSnackbarContent-root,
+.mui-lab .MuiList-root,
+.mui-lab .MuiListItem-root,
+.mui-lab .MuiListItemText-primary,
+.mui-lab .MuiListItemText-secondary {
+  background: transparent !important;
+  color: currentColor !important;
+  border-color: currentColor !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.mui-lab .MuiAlertTitle-root,
+.mui-lab .MuiIconButton-root {
+  color: currentColor !important;
+}
+
+.mui-lab .MuiSkeleton-root {
+  background: color-mix(in srgb, currentColor 25%, transparent) !important;
+}
+
+.lib-card .ant-steps .ant-steps-item-title,
+.lib-card .ant-steps .ant-steps-item-description,
+.lib-card .ant-popover-inner,
+.lib-card .ant-popover-title,
+.lib-card .ant-popover-inner-content,
+.lib-card .ant-empty-description,
+.lib-card .ant-statistic-title,
+.lib-card .ant-statistic-content {
+  color: currentColor !important;
+}
+
+.lib-card .ant-popover-inner {
+  background: transparent !important;
+  border: 1px solid currentColor !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.lib-card .ant-statistic,
+.lib-card .ant-statistic-content,
+.lib-card .ant-statistic-content-value,
+.lib-card .ant-statistic-content-suffix {
+  border: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  background: transparent !important;
+}
+
+.lib-card .ant-empty .ant-empty-image {
+  display: none !important;
+}
+
+.mui-lab .MuiBadge-badge {
+  border: 2px solid currentColor !important;
+  border-radius: 0 !important;
+  background: currentColor !important;
+  color: #f8fff8 !important;
+  -webkit-text-fill-color: #f8fff8 !important;
+  text-shadow: none !important;
+  font-weight: 700 !important;
 }
 
 .preview .rb-check-group {
@@ -557,6 +698,11 @@
   background: transparent !important;
 }
 
+.mui-lab .MuiAutocomplete-root .MuiInputBase-input::placeholder {
+  color: currentColor !important;
+  opacity: 0.75 !important;
+}
+
 .mui-lab .MuiAutocomplete-root .MuiIconButton-root,
 .mui-lab .MuiAutocomplete-root .MuiButtonBase-root.MuiIconButton-root {
   border: none !important;
@@ -590,6 +736,29 @@
   box-shadow: none !important;
 }
 
+
+.headless-btn-active {
+  filter: brightness(1.15);
+}
+
+.ascii-spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1em;
+  height: 1em;
+  border: none !important;
+  outline: none !important;
+  border-radius: 0 !important;
+  font-family: "Cascadia Mono", "Consolas", monospace;
+  font-size: 0.95em;
+  line-height: 1;
+  font-weight: 700;
+  box-shadow: none !important;
+  background: transparent !important;
+  user-select: none;
+}
+
 .headless-panel {
   border: 1px solid #475569;
   border-radius: 8px;
@@ -601,20 +770,273 @@
   position: relative;
 }
 
+.headless-listbox-root,
+.headless-combobox-root {
+  position: relative;
+}
+
+.headless-field .headless-listbox-root,
+.headless-picker .headless-listbox-root,
+.headless-picker .headless-combobox-root {
+  width: 100%;
+}
+
+.headless-listbox-root > .headless-btn {
+  width: 100%;
+}
+
 .headless-menu-items {
   display: grid;
-  gap: 0.35rem;
-  margin-top: 0.4rem;
-  padding: 0.45rem;
+  gap: 0;
+  margin-top: 0;
+  padding: 0;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 0.4rem);
+  z-index: 50;
   border: 1px solid #475569;
-  border-radius: 8px;
+  background: #e2e8f0 !important;
+  color: currentColor !important;
+  border-radius: 0 !important;
+  overflow: hidden;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  max-height: 14rem;
+}
+
+.headless-menu-items [role="menuitem"],
+.headless-menu-items [role="option"],
+.headless-menu-items button {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid currentColor !important;
+  border-radius: 0 !important;
+  background: #e2e8f0 !important;
+  color: currentColor !important;
+  text-decoration: none !important;
+  font: inherit !important;
+  line-height: 1.1 !important;
+  text-align: left;
+  padding: 0.25rem 0.45rem;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  user-select: none;
+  pointer-events: auto !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.headless-menu-items,
+.headless-menu-items * {
+  border-radius: 0 !important;
+}
+
+/* Headless Combobox exposes --input-width; use that instead of --button-width */
+.headless-menu-items[id^="headlessui-combobox-options-"] {
+  width: var(--input-width, var(--button-width, auto)) !important;
+  min-width: var(--input-width, var(--button-width, auto)) !important;
+}
+
+.headless-menu-items [role="menuitem"][data-headlessui-state~="active"],
+.headless-menu-items [role="menuitem"][data-headlessui-state~="selected"],
+.headless-menu-items button[data-headlessui-state~="active"],
+.headless-menu-items button[data-headlessui-state~="selected"],
+.headless-menu-items [role="option"][data-headlessui-state~="active"],
+.headless-menu-items [role="option"][data-headlessui-state~="selected"] {
+  background: color-mix(in srgb, currentColor 28%, #e2e8f0) !important;
+  color: currentColor !important;
+  outline: none !important;
+}
+
+.headless-menu-items :focus,
+.headless-menu-items :focus-visible {
+  outline: 1px solid currentColor !important;
+  outline-offset: 0 !important;
+  box-shadow: none !important;
+}
+
+
+.headless-combobox {
+  display: flex;
+  gap: 0.25rem;
+  width: 100%;
+  align-items: center;
+}
+
+.headless-combobox > .headless-btn:first-child {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.headless-combobox-toggle {
+  position: static;
+  pointer-events: auto !important;
+  line-height: 1;
+  font: inherit;
+  border: 2px solid currentColor !important;
+  background: transparent !important;
+  color: currentColor !important;
+  padding: 0 0.3rem !important;
+  width: 2rem !important;
+  min-width: 2rem !important;
+  height: calc(100% - 2px);
+  box-shadow: none !important;
+  cursor: pointer !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.headless-combobox .headless-btn,
+.headless-combobox input.headless-btn {
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+  white-space: nowrap !important;
+  direction: ltr;
+}
+
+/* Reset and rebuild Headless Combobox dropdown styling independently */
+.headless-combobox-options {
+  display: grid;
+  gap: 0;
+  margin-top: 0;
+  padding: 0;
+  width: var(--input-width, 100%) !important;
+  min-width: var(--input-width, 100%) !important;
+  max-width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 0.35rem);
+  z-index: 55;
+  border: 1px solid currentColor !important;
+  border-radius: 0 !important;
+  background: #e2e8f0 !important;
+  color: currentColor !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  max-height: 14rem;
+}
+
+.headless-combobox-options,
+.headless-combobox-options * {
+  border-radius: 0 !important;
+}
+
+.headless-combobox-options [role="option"] {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid currentColor !important;
+  background: #e2e8f0 !important;
+  color: currentColor !important;
+  padding: 0.3rem 0.5rem;
+  line-height: 1.1;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.headless-combobox-options [role="option"][data-headlessui-state~="active"],
+.headless-combobox-options [role="option"][data-headlessui-state~="selected"] {
+  background: color-mix(in srgb, currentColor 22%, #e2e8f0) !important;
+  color: currentColor !important;
+}
+
+.theme-crt .headless-combobox-options,
+.theme-crt .headless-combobox-options [role="option"] {
+  background: #1f3525 !important;
+  color: #c8ffd2 !important;
+  border-color: #86ff9d !important;
+}
+
+.theme-crt .headless-combobox-options [role="option"][data-headlessui-state~="active"],
+.theme-crt .headless-combobox-options [role="option"][data-headlessui-state~="selected"] {
+  background: #2b4932 !important;
+}
+
+.theme-c64 .headless-combobox-options,
+.theme-c64 .headless-combobox-options [role="option"] {
+  background: #4d5ac4 !important;
+  color: #eef0ff !important;
+  border-color: #aab0ff !important;
+}
+
+.theme-c64 .headless-combobox-options [role="option"][data-headlessui-state~="active"],
+.theme-c64 .headless-combobox-options [role="option"][data-headlessui-state~="selected"] {
+  background: #6170d6 !important;
+}
+
+.theme-msdos .headless-combobox-options,
+.theme-msdos .headless-combobox-options [role="option"] {
+  background: #121212 !important;
+  color: #c0c0c0 !important;
+  border-color: #9a9a9a !important;
+}
+
+.theme-msdos .headless-menu-items [role="menuitem"],
+.theme-msdos .headless-menu-items [role="option"],
+.theme-msdos .headless-menu-items button,
+.theme-msdos .headless-combobox-options [role="option"] {
+  border-color: #c0c0c0 !important;
+}
+
+.theme-msdos .headless-combobox-options [role="option"][data-headlessui-state~="active"],
+.theme-msdos .headless-combobox-options [role="option"][data-headlessui-state~="selected"] {
+  background: #2a2a2a !important;
+  color: #f0f0f0 !important;
 }
 
 .headless-switch-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  flex-wrap: wrap;
   gap: 0.6rem;
+}
+
+.headless-field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.headless-picker {
+  display: grid;
+  gap: 0.35rem;
+  width: 100%;
+}
+
+.headless-picker > * {
+  min-width: 0;
+}
+
+.headless-picker .headless-btn,
+.headless-field .headless-btn {
+  border-width: 1px !important;
+  padding: 0.2rem 0.45rem !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+.headless-picker > .headless-btn,
+.headless-field > .headless-btn {
+  width: 100%;
+}
+
+.headless-label {
+  font-weight: 700;
+}
+
+.headless-checkbox {
+  width: fit-content;
 }
 
 .headless-switch {
@@ -641,9 +1063,17 @@
   border-color: #5f8b68 !important;
 }
 
+
 .theme-crt .headless-switch.on {
   background: #86ff9d !important;
   border-color: #86ff9d !important;
+}
+
+.theme-crt .mui-lab .MuiBadge-badge {
+  background: #1f3525 !important;
+  border-color: #86ff9d !important;
+  color: #c8ffd2 !important;
+  -webkit-text-fill-color: #c8ffd2 !important;
 }
 
 .theme-c64 .headless-switch.off {
@@ -651,9 +1081,18 @@
   border-color: #8f97ff !important;
 }
 
+
 .theme-c64 .headless-switch.on {
   background: #aab0ff !important;
   border-color: #aab0ff !important;
+}
+
+.theme-c64 .mui-lab .MuiBadge-badge {
+  background: #4d5ac4 !important;
+  border-color: #aab0ff !important;
+  color: #f4f5ff !important;
+  -webkit-text-fill-color: #f4f5ff !important;
+  text-shadow: none !important;
 }
 
 .headless-switch-thumb {
@@ -668,6 +1107,15 @@
   box-shadow: none !important;
   background-image: none !important;
 }
+
+.theme-msdos .mui-lab .MuiBadge-badge {
+  background: #1a1a1a !important;
+  border-color: #c0c0c0 !important;
+  color: #d8d8d8 !important;
+  -webkit-text-fill-color: #d8d8d8 !important;
+  text-shadow: none !important;
+}
+
 
 .headless-switch.on .headless-switch-thumb {
   transform: translateX(18px);
@@ -715,6 +1163,68 @@
   border: 1px solid #334155;
   padding: 0.45rem 0.55rem;
   text-align: left;
+}
+
+/* Thicker divider lines across HTML + MUI + Ant */
+.preview hr,
+.preview .MuiDivider-root,
+.preview .ant-divider {
+  border-color: currentColor !important;
+  border-width: 3px !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+.preview .MuiDivider-root {
+  border-top: 0 !important;
+  border-bottom: 3px solid currentColor !important;
+}
+
+.preview .ant-divider {
+  border-top: 3px solid currentColor !important;
+}
+
+/* High-contrast tables across native + MUI + Ant + React Bootstrap */
+.preview table th,
+.preview table td,
+.preview .MuiTableCell-root,
+.preview .ant-table-cell,
+.preview .table > :not(caption) > * > * {
+  color: currentColor !important;
+  border-color: currentColor !important;
+  border-width: 2px !important;
+  background: transparent !important;
+}
+
+/* Thicker table row lines for stronger contrast */
+.preview table tr > th,
+.preview table tr > td,
+.preview .MuiTableCell-root,
+.preview .ant-table-thead > tr > th,
+.preview .ant-table-tbody > tr > td,
+.preview .table > :not(caption) > * > * {
+  border-width: 3px !important;
+}
+
+/* Extra thickness for React Bootstrap tables */
+.preview .table,
+.preview .table > :not(caption) > * > * {
+  border-width: 4px !important;
+}
+
+.preview table thead th,
+.preview .MuiTableHead-root .MuiTableCell-root,
+.preview .ant-table-thead > tr > th,
+.preview .table > thead > tr > th {
+  font-weight: 700 !important;
+  background: color-mix(in srgb, currentColor 14%, transparent) !important;
+}
+
+.preview table tbody tr:nth-child(even) td,
+.preview .MuiTableBody-root .MuiTableRow-root:nth-child(even) .MuiTableCell-root,
+.preview .ant-table-tbody > tr:nth-child(even) > td,
+.preview .table > tbody > tr:nth-child(even) > td {
+  background: color-mix(in srgb, currentColor 7%, transparent) !important;
 }
 
 .definition-list {
@@ -1117,6 +1627,11 @@
   color: #e4ffe9 !important;
 }
 
+.theme-crt .preview .pagination .page-item.active .page-link {
+  background: #86ff9d !important;
+  color: #123119 !important;
+}
+
 .theme-crt .preview .accordion {
   --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2386ff9d'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
   --bs-accordion-btn-active-icon: var(--bs-accordion-btn-icon);
@@ -1277,6 +1792,15 @@
   color: #86ff9d !important;
 }
 
+.theme-crt .MuiStepIcon-root {
+  color: #2f4f35 !important;
+}
+
+.theme-crt .MuiStepIcon-root.Mui-active,
+.theme-crt .MuiStepIcon-root.Mui-completed {
+  color: #86ff9d !important;
+}
+
 .theme-crt .MuiRating-iconEmpty {
   color: #3f6d48 !important;
 }
@@ -1394,6 +1918,15 @@
   color: #aab0ff !important;
 }
 
+.theme-c64 .MuiStepIcon-root {
+  color: #5964c7 !important;
+}
+
+.theme-c64 .MuiStepIcon-root.Mui-active,
+.theme-c64 .MuiStepIcon-root.Mui-completed {
+  color: #aab0ff !important;
+}
+
 .theme-c64 .MuiRating-iconEmpty {
   color: #626ed2 !important;
 }
@@ -1479,6 +2012,11 @@
 .theme-c64 .preview .list-group-item.active {
   background: #6470d8 !important;
   color: #eef0ff !important;
+}
+
+.theme-c64 .preview .pagination .page-item.active .page-link {
+  background: #aab0ff !important;
+  color: #313985 !important;
 }
 
 .theme-c64 .preview .accordion-button,
@@ -2028,6 +2566,42 @@
   color: #eef0ff !important;
 }
 
+.theme-crt .preview .ant-select-dropdown .ant-select-item-option-state,
+.theme-c64 .preview .ant-select-dropdown .ant-select-item-option-state,
+.theme-msdos .preview .ant-select-dropdown .ant-select-item-option-state {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 1.2em !important;
+  min-height: 1.2em !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: 1px solid currentColor !important;
+}
+
+.theme-crt .preview .ant-select-dropdown .ant-select-item-option-state {
+  background: #1f3525 !important;
+  color: #bbffbb !important;
+}
+
+.theme-c64 .preview .ant-select-dropdown .ant-select-item-option-state {
+  background: #4d5ac4 !important;
+  color: #eef0ff !important;
+}
+
+.theme-msdos .preview .ant-select-dropdown .ant-select-item-option-state {
+  background: #121212 !important;
+  color: #c0c0c0 !important;
+}
+
+.theme-crt .preview .ant-select-dropdown .ant-select-item-option-state svg[data-icon="check"],
+.theme-c64 .preview .ant-select-dropdown .ant-select-item-option-state svg[data-icon="check"],
+.theme-msdos .preview .ant-select-dropdown .ant-select-item-option-state svg[data-icon="check"] {
+  background: transparent !important;
+  color: currentColor !important;
+  fill: currentColor !important;
+}
+
 .theme-crt .preview .ant-select-selection-item,
 .theme-crt .preview .ant-picker-input > input {
   color: #bbffbb !important;
@@ -2517,7 +3091,7 @@
   line-height: 1.3 !important;
 }
 
-.theme-msdos {
+.page.theme-msdos {
   color: #c0c0c0;
   font-family: "Px437 IBM VGA8", "VT323", "Consolas", "Lucida Console", monospace;
   font-size: 24px;
@@ -2560,6 +3134,31 @@
   background-image: none !important;
 }
 
+/* Controls-only hard override for theme selector consistency */
+.theme-crt .controls .option-toggle select {
+  background: #2a3f2b !important;
+  color: #deffde !important;
+  border: 2px solid #a5d3a5 !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+.theme-c64 .controls .option-toggle select {
+  background: #5c66cd !important;
+  color: #d3d7ff !important;
+  border: 2px solid #aab0ff !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+.theme-msdos .controls .option-toggle select {
+  background: #121212 !important;
+  color: #c0c0c0 !important;
+  border: 2px solid #9a9a9a !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
 .theme-msdos .preview :is(button, .btn, .ant-btn, .headless-btn, .MuiButtonBase-root):active {
   background: #000 !important;
   border-color: #7f7f7f !important;
@@ -2586,6 +3185,15 @@
 .theme-msdos .preview .MuiRating-iconFilled,
 .theme-msdos .preview .MuiRating-iconHover,
 .theme-msdos .preview .MuiRating-iconFocus {
+  color: #c0c0c0 !important;
+}
+
+.theme-msdos .MuiStepIcon-root {
+  color: #2a2a2a !important;
+}
+
+.theme-msdos .MuiStepIcon-root.Mui-active,
+.theme-msdos .MuiStepIcon-root.Mui-completed {
   color: #c0c0c0 !important;
 }
 
@@ -2669,6 +3277,29 @@
   border-color: #c0c0c0 !important;
 }
 
+.theme-msdos .preview .nav-tabs {
+  border-bottom-color: #9a9a9a !important;
+}
+
+.theme-msdos .preview .nav-tabs .nav-link {
+  color: #c0c0c0 !important;
+  background: #000 !important;
+  border-color: #9a9a9a !important;
+}
+
+.theme-msdos .preview .nav-tabs .nav-link.active,
+.theme-msdos .preview .nav-tabs .nav-link:focus,
+.theme-msdos .preview .nav-tabs .nav-link:hover {
+  color: #f0f0f0 !important;
+  background: #2a2a2a !important;
+  border-color: #c0c0c0 !important;
+}
+
+.theme-msdos .preview .pagination .page-item.active .page-link {
+  background: #c0c0c0 !important;
+  color: #101010 !important;
+}
+
 .theme-msdos .preview .accordion {
   --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23c0c0c0'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
   --bs-accordion-btn-active-icon: var(--bs-accordion-btn-icon);
@@ -2686,6 +3317,48 @@
 
 .theme-msdos .preview .headless-switch-thumb {
   background: #c0c0c0 !important;
+}
+
+.theme-crt .headless-menu-items [data-headlessui-state~="active"],
+.theme-crt .headless-menu-items [data-headlessui-state~="selected"] {
+  background: #1f3525 !important;
+  color: #bbffbb !important;
+}
+
+.theme-crt .headless-menu-items,
+.theme-crt .headless-menu-items [role="menuitem"],
+.theme-crt .headless-menu-items [role="option"],
+.theme-crt .headless-menu-items button {
+  background: #1f3525 !important;
+  color: #c8ffd2 !important;
+}
+
+.theme-c64 .headless-menu-items [data-headlessui-state~="active"],
+.theme-c64 .headless-menu-items [data-headlessui-state~="selected"] {
+  background: #5b65cf !important;
+  color: #eef0ff !important;
+}
+
+.theme-c64 .headless-menu-items,
+.theme-c64 .headless-menu-items [role="menuitem"],
+.theme-c64 .headless-menu-items [role="option"],
+.theme-c64 .headless-menu-items button {
+  background: #4d5ac4 !important;
+  color: #eef0ff !important;
+}
+
+.theme-msdos .headless-menu-items [data-headlessui-state~="active"],
+.theme-msdos .headless-menu-items [data-headlessui-state~="selected"] {
+  background: #1a1a1a !important;
+  color: #c0c0c0 !important;
+}
+
+.theme-msdos .headless-menu-items,
+.theme-msdos .headless-menu-items [role="menuitem"],
+.theme-msdos .headless-menu-items [role="option"],
+.theme-msdos .headless-menu-items button {
+  background: #121212 !important;
+  color: #c0c0c0 !important;
 }
 
 .editable-node {
