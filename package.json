@@ -9,6 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "screenshot:check": "node scripts/screenshot-check.mjs",
+    "interaction:check": "node scripts/interaction-check.mjs",
+    "regression:loop": "node scripts/regression-loop.mjs",
     "screenshot:check:attached": "START_SERVER=0 node scripts/screenshot-check.mjs"
   },
   "dependencies": {
