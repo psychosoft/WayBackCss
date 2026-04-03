@@ -4,7 +4,7 @@ import path from "node:path";
 import process from "node:process";
 import { chromium } from "playwright";
 
-const PORT = Number(process.env.PORT ?? 4173);
+const PORT = Number(process.env.PORT ?? 5173);
 const HOST = process.env.HOST ?? "127.0.0.1";
 const BASE_URL = process.env.BASE_URL ?? `http://${HOST}:${PORT}`;
 const OUT_DIR = path.resolve(process.cwd(), "screenshots");
