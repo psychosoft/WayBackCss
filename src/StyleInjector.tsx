@@ -1,101 +1,20 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 
 type StyleInjectorProps = {
   textColor?: string;
   backgroundColor?: string;
-  editMode?: boolean;
   transparentChildren?: boolean;
   textAnimation?: boolean;
   children: React.ReactNode;
 };
 
-type Offset = { x: number; y: number };
-type OffsetMap = Record<string, Offset>;
-type ZIndexMap = Record<string, number>;
-type DragState = {
-  id: string;
-  startX: number;
-  startY: number;
-  baseX: number;
-  baseY: number;
-};
-
 export default function StyleInjector({
   textColor = "#101828",
   backgroundColor = "#e4e7ec",
-  editMode = false,
   transparentChildren = false,
   textAnimation = false,
   children,
 }: StyleInjectorProps) {
-  const [offsets, setOffsets] = useState<OffsetMap>({});
-  const [zIndices, setZIndices] = useState<ZIndexMap>({});
-  const offsetsRef = useRef<OffsetMap>(offsets);
-  const topZRef = useRef(1);
-  const dragRef = useRef<DragState | null>(null);
-
-  useEffect(() => {
-    offsetsRef.current = offsets;
-  }, [offsets]);
-
-  useEffect(() => {
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
-    };
-  }, []);
-
-  function handleMouseMove(event: MouseEvent) {
-    const drag = dragRef.current;
-    if (!drag) return;
-
-    const deltaX = event.clientX - drag.startX;
-    const deltaY = event.clientY - drag.startY;
-    const nextOffset = { x: drag.baseX + deltaX, y: drag.baseY + deltaY };
-
-    setOffsets((prev) => ({
-      ...prev,
-      [drag.id]: nextOffset,
-    }));
-  }
-
-  function handleMouseUp() {
-    dragRef.current = null;
-    window.removeEventListener("mousemove", handleMouseMove);
-    window.removeEventListener("mouseup", handleMouseUp);
-  }
-
-  function startDrag(id: string, event: React.MouseEvent) {
-    if (!editMode || event.button !== 0) return;
-
-    event.preventDefault();
-    event.stopPropagation();
-    setZIndices((prev) => {
-      const next = { ...prev };
-      const segments = id.split(".");
-      for (let i = 1; i <= segments.length; i += 1) {
-        const chainId = segments.slice(0, i).join(".");
-        const nextZ = topZRef.current + 1;
-        topZRef.current = nextZ;
-        next[chainId] = nextZ;
-      }
-      return next;
-    });
-
-    const currentOffset = offsetsRef.current[id] ?? { x: 0, y: 0 };
-
-    dragRef.current = {
-      id,
-      startX: event.clientX,
-      startY: event.clientY,
-      baseX: currentOffset.x,
-      baseY: currentOffset.y,
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseup", handleMouseUp);
-  }
-
   function injectStyles(
     node: React.ReactNode,
     path: string,
@@ -106,58 +25,16 @@ export default function StyleInjector({
     const element = node as React.ReactElement<any>;
     const tagName = typeof element.type === "string" ? element.type : "";
     const isDomElement = typeof element.type === "string";
-    const existingClassName = element.props.className ?? "";
-    const isMuiSwitchInternal =
-      typeof existingClassName === "string" &&
-      (existingClassName.includes("MuiSwitch") ||
-        existingClassName.includes("PrivateSwitchBase") ||
-        existingClassName.includes("MuiTouchRipple-root"));
-    const isTransformSensitive =
-      typeof existingClassName === "string" &&
-      (existingClassName.includes("MuiSwitch-switchBase") ||
-        existingClassName.includes("MuiSwitch-thumb") ||
-        existingClassName.includes("MuiTouchRipple-root") ||
-        existingClassName.includes("PrivateSwitchBase-input"));
-    const currentOffset = offsets[path] ?? { x: 0, y: 0 };
-    const currentZ = zIndices[path];
     const incomingStyle = (element.props.style ?? {}) as React.CSSProperties;
-    const existingTransform = incomingStyle.transform;
-    const hasOffset = currentOffset.x !== 0 || currentOffset.y !== 0;
-    const translateTransform = `translate(${currentOffset.x}px, ${currentOffset.y}px)`;
 
     const resolvedBackground =
       transparentChildren && depth > 0 ? "transparent" : backgroundColor;
 
-    const mergedStyle: React.CSSProperties = isMuiSwitchInternal
-      ? { ...incomingStyle }
-      : {
-          ...incomingStyle,
-          color: textColor,
-          backgroundColor: resolvedBackground,
-        };
-
-    if (hasOffset && !isTransformSensitive) {
-      mergedStyle.transform = existingTransform
-        ? `${existingTransform} ${translateTransform}`
-        : translateTransform;
-    }
-
-    if (currentZ !== undefined) {
-      mergedStyle.zIndex = currentZ;
-    }
-
-    if (
-      (editMode || currentZ !== undefined) &&
-      (!mergedStyle.position || mergedStyle.position === "static")
-    ) {
-      mergedStyle.position = "relative";
-    }
-
-    let mergedClassName = existingClassName;
-
-    if (isDomElement && editMode && !isMuiSwitchInternal) {
-      mergedClassName = `${existingClassName} editable-node`.trim();
-    }
+    const mergedStyle: React.CSSProperties = {
+      ...incomingStyle,
+      color: textColor,
+      backgroundColor: resolvedBackground,
+    };
 
     if (textAnimation && tagName) {
       const headingTags = new Set(["h1", "h2", "h3", "h4", "h5", "h6"]);
@@ -189,15 +66,23 @@ export default function StyleInjector({
         (mergedStyle as React.CSSProperties & Record<string, string | number>)[
           "--type-duration"
         ] = `${duration}s`;
-        mergedClassName = `${mergedClassName} terminal-typed${
+        const existingClassName = element.props.className ?? "";
+        const mergedClassName = `${existingClassName} terminal-typed${
           headingTags.has(tagName) ? " terminal-heading" : ""
         }`.trim();
+        const nextChildren = React.Children.map(
+          element.props.children,
+          (child, index) => injectStyles(child, `${path}.${index}`, depth + 1)
+        );
+
+        return React.cloneElement(element, {
+          ...element.props,
+          className: mergedClassName,
+          style: mergedStyle,
+          children: nextChildren,
+        });
       }
     }
-
-    const existingOnMouseDown = element.props.onMouseDown as
-      | React.MouseEventHandler
-      | undefined;
 
     const nextChildren = React.Children.map(
       element.props.children,
@@ -211,19 +96,13 @@ export default function StyleInjector({
       });
     }
 
-    return React.cloneElement(element, {
+    const domProps: Record<string, unknown> = {
       ...element.props,
-      className: mergedClassName,
-      "data-editable": editMode && !isMuiSwitchInternal ? "true" : undefined,
-      onMouseDown: (event: React.MouseEvent) => {
-        existingOnMouseDown?.(event);
-        if (!event.defaultPrevented && !isTransformSensitive && !isMuiSwitchInternal) {
-          startDrag(path, event);
-        }
-      },
       style: mergedStyle,
       children: nextChildren,
-    });
+    };
+
+    return React.cloneElement(element, domProps);
   }
 
   return (

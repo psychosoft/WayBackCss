@@ -1,6 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
 import StyleInjector from "./StyleInjector";
+import EditableDragLayer from "./EditableDragLayer";
+import FloatingEditPanel from "./FloatingEditPanel";
 import heroImage from "./assets/hero.png";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "./assets/vite.svg";
@@ -174,6 +176,30 @@ function App() {
   const [transparentChildren, setTransparentChildren] = useState(true);
   const [theme, setTheme] = useState<ThemeMode>("c64");
   const [textAnimation, setTextAnimation] = useState(true);
+  const [dragDepth, setDragDepth] = useState(6);
+  const [snapToGrid, setSnapToGrid] = useState(false);
+  const [gridSize, setGridSize] = useState(8);
+  const [axisLock, setAxisLock] = useState<"both" | "x" | "y">("both");
+  const [dragResetSignal, setDragResetSignal] = useState(0);
+  const [editPanelOpen, setEditPanelOpen] = useState(false);
+  const [manipulatedNodes, setManipulatedNodes] = useState<
+    Array<{
+      id: string;
+      state: "hidden" | "removed";
+      label: string;
+      preview: {
+        tag: string;
+        text: string;
+        imageSrc?: string;
+        backgroundColor?: string;
+        width?: number;
+        height?: number;
+        sourceTop?: number;
+      };
+    }>
+  >([]);
+  const [restoreTargetId, setRestoreTargetId] = useState<string | null>(null);
+  const [restoreSignal, setRestoreSignal] = useState(0);
   const [muiTab, setMuiTab] = useState(0);
   const [muiPage, setMuiPage] = useState(2);
   const [muiRating, setMuiRating] = useState<number | null>(3);
@@ -192,6 +218,84 @@ function App() {
   const [antSlider, setAntSlider] = useState<number>(35);
   const [antRadio, setAntRadio] = useState("alpha");
   const [antSegment, setAntSegment] = useState("Alpha");
+  const hintNodeRef = useRef<HTMLElement | null>(null);
+  const hintShowTimeoutRef = useRef<number | null>(null);
+  const hintHideTimeoutRef = useRef<number | null>(null);
+
+  function clearLocationHint() {
+    const current = hintNodeRef.current;
+    if (current) {
+      current.classList.remove("location-placeholder-active");
+      current.classList.remove("location-placeholder-hidden");
+      current.style.removeProperty("--placeholder-width");
+      current.style.removeProperty("--placeholder-height");
+    }
+    hintNodeRef.current = null;
+    if (hintShowTimeoutRef.current !== null) {
+      window.clearTimeout(hintShowTimeoutRef.current);
+      hintShowTimeoutRef.current = null;
+    }
+    if (hintHideTimeoutRef.current !== null) {
+      window.clearTimeout(hintHideTimeoutRef.current);
+      hintHideTimeoutRef.current = null;
+    }
+  }
+
+  function showLocationHint(id: string) {
+    clearLocationHint();
+    const target = manipulatedNodes.find((item) => item.id === id);
+    if (!target) return;
+
+    const liveNode = document.querySelector<HTMLElement>(`[data-node-id="${id}"]`);
+    if (!liveNode) return;
+    const liveRect = liveNode.getBoundingClientRect();
+    const hasLiveSize = liveRect.width > 1 && liveRect.height > 1;
+    const liveTooSmall = liveRect.width < 20 || liveRect.height < 14;
+
+    const sourceTop = Math.max(0, Math.round(target.preview.sourceTop ?? 0));
+
+    const previewWidth = Number(target.preview.width ?? 0);
+    const previewHeight = Number(target.preview.height ?? 0);
+    const liveWidth = hasLiveSize && !liveTooSmall ? liveRect.width : 0;
+    const liveHeight = hasLiveSize && !liveTooSmall ? liveRect.height : 0;
+    const preferredWidth = Math.max(previewWidth || 0, liveWidth || 0);
+    const preferredHeight = Math.max(previewHeight || 0, liveHeight || 0);
+
+    const placeholderWidth = Math.max(32, Math.round(preferredWidth || previewWidth || liveRect.width || 64));
+    const placeholderHeight = Math.max(20, Math.round(preferredHeight || previewHeight || liveRect.height || 40));
+
+    const scrollTarget = Math.max(0, sourceTop - 140);
+    window.scrollTo({ top: scrollTarget, behavior: "smooth" });
+
+    hintShowTimeoutRef.current = window.setTimeout(() => {
+      liveNode.style.setProperty("--placeholder-width", `${Math.round(placeholderWidth)}px`);
+      liveNode.style.setProperty("--placeholder-height", `${Math.round(placeholderHeight)}px`);
+      liveNode.classList.add("location-placeholder-active");
+      if (target.state === "hidden") {
+        liveNode.classList.add("location-placeholder-hidden");
+      } else {
+        liveNode.classList.remove("location-placeholder-hidden");
+      }
+      hintNodeRef.current = liveNode;
+      hintHideTimeoutRef.current = window.setTimeout(() => {
+        if (hintNodeRef.current === liveNode) {
+          clearLocationHint();
+        }
+      }, 3200);
+    }, 420);
+  }
+
+  useEffect(() => {
+    return () => {
+      clearLocationHint();
+      if (hintShowTimeoutRef.current !== null) {
+        window.clearTimeout(hintShowTimeoutRef.current);
+      }
+      if (hintHideTimeoutRef.current !== null) {
+        window.clearTimeout(hintHideTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const themeColors: Record<ThemeMode, { text: string; background: string }> = {
     default: { text: "#0f172a", background: "#e2e8f0" },
@@ -770,21 +874,6 @@ function App() {
       <section className="controls">
         <h1>Style Injector Demo</h1>
         <p>Select a theme and verify styles are injected into nested children.</p>
-        <button
-          type="button"
-          className={`edit-toggle ${editMode ? "on" : "off"}`}
-          onClick={() => setEditMode((prev) => !prev)}
-        >
-          {editMode ? "Disable edit mode" : "Enable edit mode"}
-        </button>
-        <label className="option-toggle option-toggle-inline">
-          <input
-            type="checkbox"
-            checked={transparentChildren}
-            onChange={(event) => setTransparentChildren(event.target.checked)}
-          />
-          Transparent nested backgrounds
-        </label>
         <label className="option-toggle">
           Theme
           <select
@@ -797,24 +886,63 @@ function App() {
             <option value="msdos">MS-DOS</option>
           </select>
         </label>
-        <label className="option-toggle option-toggle-inline">
-          <input
-            type="checkbox"
-            checked={textAnimation}
-            onChange={(event) => setTextAnimation(event.target.checked)}
-          />
-          Terminal typing animation
-        </label>
       </section>
 
-      <StyleInjector
-        textColor={textColor}
-        backgroundColor={backgroundColor}
+      <FloatingEditPanel
+        onPanelOpenChange={setEditPanelOpen}
         editMode={editMode}
+        onEditModeChange={setEditMode}
         transparentChildren={transparentChildren}
+        onTransparentChildrenChange={setTransparentChildren}
         textAnimation={textAnimation}
+        onTextAnimationChange={setTextAnimation}
+        dragDepth={dragDepth}
+        onDragDepthChange={setDragDepth}
+        snapToGrid={snapToGrid}
+        onSnapToGridChange={setSnapToGrid}
+        gridSize={gridSize}
+        onGridSizeChange={setGridSize}
+        axisLock={axisLock}
+        onAxisLockChange={setAxisLock}
+        onResetLayout={() => setDragResetSignal((prev) => prev + 1)}
+        manipulatedNodes={manipulatedNodes}
+        onPreviewHover={showLocationHint}
+        onReinsertNode={async (id) => {
+          clearLocationHint();
+          const target = manipulatedNodes.find((item) => item.id === id);
+          const sourceTop = target?.preview.sourceTop;
+          const liveNode = document.querySelector<HTMLElement>(`[data-node-id="${id}"]`);
+          if (liveNode) {
+            liveNode.scrollIntoView({ behavior: "smooth", block: "center" });
+            await new Promise((resolve) => window.setTimeout(resolve, 420));
+          } else if (typeof sourceTop === "number" && Number.isFinite(sourceTop)) {
+            const scrollTop = Math.max(0, Math.round(sourceTop - 120));
+            window.scrollTo({ top: scrollTop, behavior: "smooth" });
+            await new Promise((resolve) => window.setTimeout(resolve, 420));
+          }
+          setRestoreTargetId(id);
+          setRestoreSignal((prev) => prev + 1);
+        }}
+      />
+
+      <EditableDragLayer
+        enabled={editMode || editPanelOpen}
+        maxDepth={dragDepth}
+        snapToGrid={snapToGrid}
+        gridSize={gridSize}
+        axisLock={axisLock}
+        resetSignal={dragResetSignal}
+        restoreSignal={restoreSignal}
+        restoreTargetId={restoreTargetId}
+        onManipulatedNodesChange={setManipulatedNodes}
       >
-        <section className="preview">
+        <StyleInjector
+          textColor={textColor}
+          backgroundColor={backgroundColor}
+          transparentChildren={transparentChildren}
+          textAnimation={textAnimation}
+        >
+          <section className="preview">
           <h2>Injected Container</h2>
           <p>
             This area contains many HTML elements so you can test how style
@@ -1755,8 +1883,9 @@ function App() {
               </HeadlessTabGroup>
             </section>
           </section>
-        </section>
-      </StyleInjector>
+          </section>
+        </StyleInjector>
+      </EditableDragLayer>
     </main>
   );
 }

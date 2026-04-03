@@ -203,11 +203,194 @@
   padding: 0.4rem 0.6rem;
 }
 
+.floating-edit-panel {
+  position: fixed;
+  right: 14px;
+  bottom: 14px;
+  z-index: 1200;
+  display: grid;
+  gap: 0.5rem;
+  max-width: min(92vw, 360px);
+}
+
+.floating-edit-fab {
+  border: 2px solid currentColor;
+  border-radius: 0;
+  padding: 0.5rem 0.85rem;
+  background: #0f172a;
+  color: #e2e8f0;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.floating-edit-fab.on {
+  filter: brightness(1.1);
+}
+
+.floating-edit-content {
+  width: min(92vw, 360px);
+  max-height: min(72vh, 620px);
+  overflow: auto;
+  border-radius: 0;
+  display: grid;
+  gap: 0.55rem;
+  background: #e2e8f0;
+}
+
+.floating-edit-content h3 {
+  margin: 0;
+}
+
+.floating-edit-drag-handle {
+  cursor: move;
+  user-select: none;
+  border: 1px dashed currentColor;
+  padding: 0.35rem 0.45rem;
+}
+
+.floating-edit-content .option-toggle {
+  margin-bottom: 0;
+}
+
+.floating-edit-content input[type="number"],
+.floating-edit-content input[type="range"],
+.floating-edit-content select {
+  width: 100%;
+}
+
+.floating-edit-content .panel-action-btn {
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  padding: 0.35rem 0.55rem;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.floating-edit-content .panel-action-btn:active {
+  filter: brightness(0.86);
+}
+
+.manipulated-list-section {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.manipulated-list-section h4 {
+  margin: 0;
+}
+
+.manipulated-empty {
+  margin: 0;
+  opacity: 0.8;
+}
+
+.manipulated-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+  max-height: 220px;
+  overflow: auto;
+  border: 1px solid currentColor;
+  padding-inline: 0.35rem;
+  padding-block: 0.35rem;
+}
+
+.manipulated-item {
+  display: grid;
+  gap: 0.3rem;
+  border: 1px dashed currentColor;
+  padding: 0.35rem;
+}
+
+.manipulated-item-meta {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.manipulated-item-title {
+  margin: 0;
+  color: #000000;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.manipulated-item-state {
+  margin: 0;
+  font-size: 0.76rem;
+  color: inherit;
+  overflow-wrap: anywhere;
+}
+
+.manipulated-hover-zone {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.manipulated-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 0;
+  width: 100%;
+}
+
+.manipulated-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.manipulated-preview-popover {
+  opacity: 1;
+  overflow: hidden;
+  margin-top: 6px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid currentColor;
+  box-shadow: none;
+  pointer-events: none;
+  justify-self: center;
+}
+
+.manipulated-preview-text {
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+  align-self: center;
+  width: 100%;
+}
+
+.state-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3.8rem;
+  border: 1px solid currentColor;
+  font-size: 0.72rem;
+  padding: 0.1rem 0.35rem;
+  text-transform: uppercase;
+}
+
+.state-pill.hidden {
+  background: color-mix(in srgb, currentColor 16%, transparent);
+}
+
+.state-pill.removed {
+  background: color-mix(in srgb, currentColor 26%, transparent);
+}
+
 .preview {
   border: 1px solid #cbd5e1;
   border-radius: 12px;
   padding: 1rem;
-  overflow-x: clip;
+  overflow: visible;
 }
 
 .stack-row {
@@ -2000,14 +2183,14 @@
   border-radius: 0;
 }
 
-.theme-c64 .preview img {
+.theme-c64 .preview img:not([data-editable="true"]) {
   image-rendering: pixelated;
   filter: grayscale(1) sepia(1) hue-rotate(195deg) saturate(2.2) brightness(0.86)
     contrast(1.12) !important;
   transform: none !important;
 }
 
-.theme-c64 .preview img:hover {
+.theme-c64 .preview img:not([data-editable="true"]):hover {
   filter: grayscale(1) sepia(1) hue-rotate(195deg) saturate(2.45) brightness(0.9)
     contrast(1.16) !important;
   transform: scale(1.01) !important;
@@ -3424,17 +3607,133 @@
   cursor: grabbing;
 }
 
+.editable-node[data-node-removed="true"] {
+  outline: none !important;
+}
+
+.editable-node::before,
 .editable-node::after {
-  content: "";
   position: absolute;
-  right: -12px;
-  bottom: -12px;
-  width: 12px;
-  height: 12px;
-  border: 2px solid #6b7280;
+  top: 2px;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #6b7280;
   background: #e5e7eb;
-  border-radius: 2px;
+  color: #111827;
+  font-size: 11px;
+  line-height: 14px;
+  text-align: center;
   pointer-events: none;
+  z-index: 4;
+}
+
+.editable-node::before {
+  content: "O";
+  right: 22px;
+}
+
+.editable-node::after {
+  content: "X";
+  right: 2px;
+}
+
+/* Do not override terminal caret pseudo-elements with edit icons. */
+.editable-node.terminal-typed::before,
+.editable-node.terminal-typed::after,
+.editable-node.terminal-heading::before,
+.editable-node.terminal-heading::after {
+  display: none !important;
+}
+
+.editable-node[data-node-hidden="true"]::before,
+.editable-node[data-node-removed="true"]::before,
+.editable-node[data-node-removed="true"]::after {
+  display: none;
+}
+
+.editable-node[data-node-hidden="true"] {
+  outline: 4px dotted color-mix(in srgb, currentColor 58%, #94a3b8) !important;
+  outline-offset: 6px;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      color-mix(in srgb, currentColor 18%, transparent) 0 6px,
+      transparent 6px 12px
+    ) !important;
+}
+
+.editable-node[data-node-hidden="true"] > * {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.editable-node[data-node-hidden="true"]::before,
+.editable-node[data-node-hidden="true"]::after {
+  border-color: color-mix(in srgb, currentColor 72%, #475569);
+  background: color-mix(in srgb, currentColor 20%, #0f172a);
+  color: color-mix(in srgb, currentColor 90%, #ffffff);
+}
+
+.editable-node[data-node-hidden="true"]::before {
+  content: "H";
+}
+
+/*
+  Keep visual marker for drag controls available area.
+  Actual click handling happens in EditableDragLayer via hit-testing.
+*/
+.editable-node[data-editable="true"] {
+  position: relative;
+}
+
+/* Snapshot mode: capture actual component visuals without edit overlays. */
+.preview-capture-mode .editable-node {
+  outline: none !important;
+  outline-offset: 0 !important;
+}
+
+.preview-capture-mode .editable-node::before,
+.preview-capture-mode .editable-node::after {
+  display: none !important;
+}
+
+.location-placeholder-active {
+  width: var(--placeholder-width) !important;
+  min-width: var(--placeholder-width) !important;
+  max-width: var(--placeholder-width) !important;
+  height: var(--placeholder-height) !important;
+  min-height: var(--placeholder-height) !important;
+  max-height: var(--placeholder-height) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 2px dashed currentColor !important;
+  background: repeating-linear-gradient(
+    -45deg,
+    color-mix(in srgb, currentColor 20%, transparent) 0 8px,
+    color-mix(in srgb, currentColor 6%, transparent) 8px 16px
+  ) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.location-placeholder-active > * {
+  opacity: 0 !important;
+}
+
+.editable-node[data-node-hidden="true"].location-placeholder-active,
+.editable-node[data-node-hidden="true"].location-placeholder-hidden {
+  outline: 3px solid currentColor !important;
+  outline-offset: 5px !important;
+  border: 2px dashed color-mix(in srgb, currentColor 88%, #ffffff) !important;
+  box-shadow: 0 0 0 2px color-mix(in srgb, currentColor 26%, transparent) !important;
+  background: repeating-linear-gradient(
+    -45deg,
+    color-mix(in srgb, currentColor 36%, transparent) 0 8px,
+    color-mix(in srgb, currentColor 14%, transparent) 8px 16px
+  ) !important;
 }
 
 .terminal-typed {

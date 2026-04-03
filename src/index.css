@@ -2,7 +2,30 @@
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+}
+
 body {
   margin: 0;
   background: #f8fafc;
+  overflow-x: hidden;
+}
+
+/* Theme class is used on body for portal components, but body itself should stay neutral */
+body.theme-crt,
+body.theme-c64,
+body.theme-msdos,
+body.theme-default {
+  border: 0 !important;
+  box-shadow: none !important;
+  background: #f8fafc !important;
+  font-family: inherit !important;
+  font-size: 16px !important;
+  line-height: normal !important;
+  letter-spacing: normal !important;
 }

@@ -11,6 +11,7 @@
     "screenshot:check": "node scripts/screenshot-check.mjs",
     "interaction:check": "node scripts/interaction-check.mjs",
     "regression:loop": "node scripts/regression-loop.mjs",
+    "preview:manipulated:check": "node scripts/manipulated-preview-check.mjs",
     "screenshot:check:attached": "START_SERVER=0 node scripts/screenshot-check.mjs"
   },
   "dependencies": {
@@ -20,6 +21,8 @@
     "@mui/material": "^7.3.9",
     "antd": "^6.3.5",
     "bootstrap": "^5.3.8",
+    "dom-to-image-more": "^3.7.2",
+    "html2canvas": "^1.4.1",
     "react": "^19.2.4",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.2.4"
