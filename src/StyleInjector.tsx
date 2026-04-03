@@ -106,6 +106,18 @@ export default function StyleInjector({
     const element = node as React.ReactElement<any>;
     const tagName = typeof element.type === "string" ? element.type : "";
     const isDomElement = typeof element.type === "string";
+    const existingClassName = element.props.className ?? "";
+    const isMuiSwitchInternal =
+      typeof existingClassName === "string" &&
+      (existingClassName.includes("MuiSwitch") ||
+        existingClassName.includes("PrivateSwitchBase") ||
+        existingClassName.includes("MuiTouchRipple-root"));
+    const isTransformSensitive =
+      typeof existingClassName === "string" &&
+      (existingClassName.includes("MuiSwitch-switchBase") ||
+        existingClassName.includes("MuiSwitch-thumb") ||
+        existingClassName.includes("MuiTouchRipple-root") ||
+        existingClassName.includes("PrivateSwitchBase-input"));
     const currentOffset = offsets[path] ?? { x: 0, y: 0 };
     const currentZ = zIndices[path];
     const incomingStyle = (element.props.style ?? {}) as React.CSSProperties;
@@ -116,13 +128,15 @@ export default function StyleInjector({
     const resolvedBackground =
       transparentChildren && depth > 0 ? "transparent" : backgroundColor;
 
-    const mergedStyle: React.CSSProperties = {
-      ...incomingStyle,
-      color: textColor,
-      backgroundColor: resolvedBackground,
-    };
+    const mergedStyle: React.CSSProperties = isMuiSwitchInternal
+      ? { ...incomingStyle }
+      : {
+          ...incomingStyle,
+          color: textColor,
+          backgroundColor: resolvedBackground,
+        };
 
-    if (hasOffset) {
+    if (hasOffset && !isTransformSensitive) {
       mergedStyle.transform = existingTransform
         ? `${existingTransform} ${translateTransform}`
         : translateTransform;
@@ -139,10 +153,9 @@ export default function StyleInjector({
       mergedStyle.position = "relative";
     }
 
-    const existingClassName = element.props.className ?? "";
     let mergedClassName = existingClassName;
 
-    if (isDomElement && editMode) {
+    if (isDomElement && editMode && !isMuiSwitchInternal) {
       mergedClassName = `${existingClassName} editable-node`.trim();
     }
 
@@ -201,10 +214,10 @@ export default function StyleInjector({
     return React.cloneElement(element, {
       ...element.props,
       className: mergedClassName,
-      "data-editable": editMode ? "true" : undefined,
+      "data-editable": editMode && !isMuiSwitchInternal ? "true" : undefined,
       onMouseDown: (event: React.MouseEvent) => {
         existingOnMouseDown?.(event);
-        if (!event.defaultPrevented) {
+        if (!event.defaultPrevented && !isTransformSensitive && !isMuiSwitchInternal) {
           startDrag(path, event);
         }
       },

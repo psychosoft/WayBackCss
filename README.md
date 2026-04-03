@@ -1,100 +1,73 @@
-# WayBackCss
+# React + TypeScript + Vite
 
-WayBackCss is a React playground for **runtime style injection**.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-It lets you wrap arbitrary component trees and apply a retro visual layer (CRT/C64-style themes), then toggle an edit mode where elements can be dragged with persistent offsets.
+Currently, two official plugins are available:
 
-## What this project does
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-- Injects styles across nested child elements at runtime
-- Applies theme-driven color and typography overrides
-- Supports a drag/edit overlay mode with visible frames/handles
-- Keeps drag offsets when edit mode is turned off
-- Tests cross-library styling behavior in one page:
-  - Native HTML elements
-  - MUI
-  - Ant Design
-  - React Bootstrap
-  - Headless UI
+## React Compiler
 
-## Theme modes
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-The demo includes theme presets controlled from the UI:
+## Expanding the ESLint configuration
 
-- `Default`
-- `CRT`
-- `Commodore 64`
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-Theme mode controls colors, borders, typography, and visual effects. The retro typing/caret behavior on headings is also theme-aware.
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-## Edit mode behavior
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-When edit mode is enabled:
-
-- target elements get a visible frame
-- drag handles appear
-- moving an element stores an offset transform
-- recently dragged elements are promoted above previous ones
-
-When edit mode is disabled:
-
-- frames/handles are hidden
-- saved element offsets remain applied
-
-## Tech stack
-
-- React 19 + TypeScript
-- Vite
-- MUI
-- Ant Design
-- React Bootstrap
-- Headless UI
-
-## Getting started
-
-## Prerequisites
-
-- Node.js 20+
-- npm 10+
-
-## Install
-
-```bash
-npm install
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
 
-## Run dev server
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```bash
-npm run dev
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-
-Then open the local Vite URL shown in terminal (usually `http://localhost:5173`).
-
-## Build
-
-```bash
-npm run build
-```
-
-## Preview production build
-
-```bash
-npm run preview
-```
-
-## Project structure
-
-- `src/StyleInjector.tsx`: style injection + drag/edit mechanics
-- `src/App.tsx`: demo content and controls
-- `src/App.css`: global/theme styling and library-specific overrides
-- `src/main.tsx`: app bootstrap and global stylesheet imports
-
-## Notes
-
-- This project intentionally uses strong CSS overrides to normalize third-party component libraries under a single retro theme.
-- Some libraries generate dynamic classnames; selectors in `App.css` are written to remain resilient, but may require updates on major library upgrades.
-
-## License
-
-MIT

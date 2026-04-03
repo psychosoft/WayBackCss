@@ -1,5 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+@font-face {
+  font-family: "Px437 IBM VGA8";
+  src:
+    url("https://cdn.jsdelivr.net/gh/jenskutilek/homecomputer-fonts@master/font/webfonts/Px437_IBM_VGA_8x16.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/jenskutilek/homecomputer-fonts@master/font/webfonts/Px437_IBM_VGA_8x16.woff")
+      format("woff");
+  font-display: swap;
+}
 
 @keyframes terminal-type-in {
   0% {
@@ -200,6 +209,10 @@
   cursor: pointer;
 }
 
+.preview :is(button, .btn, .ant-btn, .headless-btn, .MuiButtonBase-root):active {
+  filter: brightness(0.78);
+}
+
 .preview button:focus,
 .preview input:focus,
 .preview select:focus,
@@ -264,11 +277,14 @@
 }
 
 .demo-dialog {
-  border: 1px solid #334155;
+  border: 2px solid currentColor;
   border-radius: 8px;
   padding: 0.75rem;
   margin: 0;
   position: static;
+  box-shadow: none !important;
+  background-image: none !important;
+  outline: none !important;
 }
 
 .mui-lab {
@@ -353,10 +369,12 @@
 }
 
 .headless-btn {
-  border: 1px solid #334155;
+  border: 3px solid currentColor;
   border-radius: 8px;
   padding: 0.35rem 0.65rem;
   cursor: pointer;
+  background-image: none !important;
+  box-shadow: none !important;
 }
 
 .headless-panel {
@@ -390,9 +408,11 @@
   position: relative;
   width: 42px;
   height: 24px;
-  border-radius: 999px;
+  border-radius: 0 !important;
   border: 1px solid #334155;
   transition: background-color 120ms ease;
+  box-shadow: none !important;
+  background-image: none !important;
 }
 
 .headless-switch.off {
@@ -403,15 +423,37 @@
   background: #22c55e;
 }
 
+.theme-crt .headless-switch.off {
+  background: #1f3525 !important;
+  border-color: #5f8b68 !important;
+}
+
+.theme-crt .headless-switch.on {
+  background: #86ff9d !important;
+  border-color: #86ff9d !important;
+}
+
+.theme-c64 .headless-switch.off {
+  background: #4d5ac4 !important;
+  border-color: #8f97ff !important;
+}
+
+.theme-c64 .headless-switch.on {
+  background: #aab0ff !important;
+  border-color: #aab0ff !important;
+}
+
 .headless-switch-thumb {
   position: absolute;
-  top: 2px;
+  top: 1px;
   left: 2px;
   width: 18px;
   height: 18px;
-  border-radius: 50%;
+  border-radius: 0 !important;
   background: #ffffff;
   transition: transform 120ms ease;
+  box-shadow: none !important;
+  background-image: none !important;
 }
 
 .headless-switch.on .headless-switch-thumb {
@@ -495,6 +537,125 @@
 .preview img:hover {
   filter: saturate(1.28) contrast(1.1) hue-rotate(-14deg);
   transform: perspective(700px) rotateX(0deg) rotateY(0deg) scale(1.02);
+}
+
+/* Native range + radio flattening */
+.preview input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 14px;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent;
+  box-shadow: none !important;
+}
+
+.theme-crt .preview input[type="range"],
+.theme-c64 .preview input[type="range"],
+.theme-msdos .preview input[type="range"] {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.preview input[type="range"]::-webkit-slider-runnable-track {
+  height: 10px;
+  background: currentColor;
+  border: 0;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.preview input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  margin-top: -1px;
+  background: #ffffff;
+  border: 0;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.preview input[type="range"]::-moz-range-track {
+  height: 10px;
+  background: currentColor;
+  border: 0;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.preview input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  border: 0;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.preview input[type="radio"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  margin: 0 0.35rem 0 0;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.preview input[type="radio"]:checked {
+  background: currentColor !important;
+}
+
+.preview input[type="checkbox"]:not(.MuiSwitch-input):not(.PrivateSwitchBase-input) {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  margin: 0 0.35rem 0 0;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  vertical-align: middle;
+  cursor: pointer;
+  position: relative;
+}
+
+.preview
+  input[type="checkbox"]:not(.MuiSwitch-input):not(.PrivateSwitchBase-input):checked::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: currentColor;
+}
+
+.preview progress {
+  width: 100%;
+  height: 18px;
+  border: 3px solid currentColor;
+  border-radius: 0 !important;
+  background: transparent;
+  box-shadow: none !important;
+}
+
+.preview progress::-webkit-progress-bar {
+  background: transparent;
+}
+
+.preview progress::-webkit-progress-value {
+  background: currentColor;
+}
+
+.preview progress::-moz-progress-bar {
+  background: currentColor;
 }
 
 .theme-crt .controls,
@@ -675,6 +836,44 @@
   outline: none !important;
 }
 
+.theme-crt .preview .form-control::placeholder {
+  color: #3f6d48 !important;
+  opacity: 1 !important;
+}
+
+.theme-crt .preview input[type="radio"] {
+  background: #17281b !important;
+}
+
+.theme-crt .preview input[type="radio"]:checked {
+  background: #86ff9d !important;
+}
+
+.theme-crt .preview input[type="checkbox"] {
+  background: #17281b !important;
+}
+
+.theme-crt .preview input[type="checkbox"]:checked::after {
+  background: #86ff9d !important;
+}
+
+.theme-crt .preview input[type="date"] {
+  background: #17281b !important;
+  color: #bbffbb !important;
+  border-color: #86ff9d !important;
+}
+
+.theme-crt .preview input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: sepia(1) saturate(8) hue-rotate(48deg) brightness(0.95) contrast(1.05);
+}
+
+.theme-crt .preview input[type="search"] {
+  border-style: solid !important;
+  border-width: 2px !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
 /* MUI primary accents override (blue -> CRT green) */
 .theme-crt .MuiTab-root.Mui-selected {
   color: #bbffbb !important;
@@ -684,19 +883,8 @@
   background-color: #86ff9d !important;
 }
 
-.theme-crt .MuiSwitch-switchBase.Mui-checked {
-  color: #86ff9d !important;
-}
-
-.theme-crt .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
-  background-color: #49d879 !important;
-  opacity: 1 !important;
-}
-
 .theme-crt .MuiChip-root,
 .theme-crt .MuiChip-label,
-.theme-crt .MuiSwitch-track,
-.theme-crt .MuiSwitch-thumb,
 .theme-crt .MuiSlider-thumb,
 .theme-crt .MuiSlider-valueLabel,
 .theme-crt .MuiSlider-rail,
@@ -725,6 +913,16 @@
 
 .theme-crt .MuiLinearProgress-bar {
   background-color: #86ff9d !important;
+}
+
+.theme-crt .MuiRating-iconFilled,
+.theme-crt .MuiRating-iconHover,
+.theme-crt .MuiRating-iconFocus {
+  color: #86ff9d !important;
+}
+
+.theme-crt .MuiRating-iconEmpty {
+  color: #3f6d48 !important;
 }
 
 .theme-c64 .controls,
@@ -799,8 +997,6 @@
 
 .theme-c64 .MuiChip-root,
 .theme-c64 .MuiChip-label,
-.theme-c64 .MuiSwitch-track,
-.theme-c64 .MuiSwitch-thumb,
 .theme-c64 .MuiSlider-thumb,
 .theme-c64 .MuiSlider-valueLabel,
 .theme-c64 .MuiSlider-rail,
@@ -821,6 +1017,16 @@
 .theme-c64 .MuiButtonBase-root {
   box-shadow: none !important;
   background-image: none !important;
+}
+
+.theme-c64 .MuiRating-iconFilled,
+.theme-c64 .MuiRating-iconHover,
+.theme-c64 .MuiRating-iconFocus {
+  color: #aab0ff !important;
+}
+
+.theme-c64 .MuiRating-iconEmpty {
+  color: #626ed2 !important;
 }
 
 .theme-c64 .data-table th,
@@ -929,6 +1135,45 @@
   outline: none !important;
 }
 
+.theme-c64 .preview input[type="radio"] {
+  background: #4d5ac4 !important;
+}
+
+.theme-c64 .preview input[type="radio"]:checked {
+  background: #aab0ff !important;
+}
+
+.theme-c64 .preview input[type="checkbox"] {
+  background: #4d5ac4 !important;
+}
+
+.theme-c64 .preview input[type="checkbox"]:checked::after {
+  background: #aab0ff !important;
+}
+
+.theme-c64 .preview input[type="date"] {
+  background: #4d5ac4 !important;
+  color: #cfd5ff !important;
+  border-color: #aab0ff !important;
+}
+
+.theme-c64 .preview input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: sepia(1) saturate(1.1) hue-rotate(178deg) brightness(1.15) contrast(0.95);
+}
+
+.theme-c64 .preview input[type="search"] {
+  border-style: solid !important;
+  border-width: 2px !important;
+  box-shadow: none !important;
+  background-image: none !important;
+  color: #aab0ff !important;
+}
+
+.theme-c64 .preview input[type="search"]::placeholder {
+  color: #8f97ff !important;
+  opacity: 1 !important;
+}
+
 /* Ant Design: darker alert + square switch + themed progress + sunken fields */
 .theme-crt .preview .ant-alert-info {
   background: #1c2e21 !important;
@@ -980,6 +1225,14 @@
   background-image: none !important;
 }
 
+.theme-crt .preview button[role="switch"].ant-switch .ant-switch-handle::before {
+  background: #86ff9d !important;
+}
+
+.theme-c64 .preview button[role="switch"].ant-switch .ant-switch-handle::before {
+  background: #aab0ff !important;
+}
+
 .theme-crt .preview .ant-btn,
 .theme-crt .preview .ant-btn-default,
 .theme-crt .preview .ant-btn-primary,
@@ -1028,12 +1281,14 @@
 
 .theme-crt .preview .progress {
   background-color: #2f4f35 !important;
-  border: 1px solid #86ff9d !important;
+  border: 2px solid #86ff9d !important;
 }
 
 .theme-crt .preview .progress-bar {
   background-color: #86ff9d !important;
   color: #0a220f !important;
+  border: 2px solid #86ff9d !important;
+  box-sizing: border-box !important;
 }
 
 .theme-c64 .preview .ant-progress .ant-progress-bg,
@@ -1053,12 +1308,14 @@
 
 .theme-c64 .preview .progress {
   background-color: #5964c7 !important;
-  border: 1px solid #aab0ff !important;
+  border: 2px solid #aab0ff !important;
 }
 
 .theme-c64 .preview .progress-bar {
   background-color: #aab0ff !important;
   color: #30367a !important;
+  border: 2px solid #aab0ff !important;
+  box-sizing: border-box !important;
 }
 
 .theme-crt .preview .ant-input,
@@ -1320,6 +1577,195 @@
   color: #cfd5ff !important;
 }
 
+/* Ant Design overrides in MS-DOS theme */
+.theme-msdos .preview .ant-alert-info {
+  background: #000 !important;
+  color: #c0c0c0 !important;
+  border: 2px solid #9a9a9a !important;
+}
+
+.theme-msdos .preview .ant-switch {
+  border: 2px solid #9a9a9a !important;
+  background: #121212 !important;
+  border-radius: 0 !important;
+  min-width: 42px !important;
+  height: 22px !important;
+  line-height: 20px !important;
+  box-shadow: none !important;
+}
+
+.theme-msdos .preview .ant-switch .ant-switch-inner,
+.theme-msdos .preview .ant-switch .ant-switch-handle,
+.theme-msdos .preview .ant-switch .ant-switch-handle::before {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.theme-msdos .preview .ant-switch .ant-switch-handle {
+  width: 18px !important;
+  height: 18px !important;
+  top: 0 !important;
+  left: 1px !important;
+}
+
+.theme-msdos .preview .ant-switch.ant-switch-checked .ant-switch-handle {
+  inset-inline-start: calc(100% - 19px) !important;
+}
+
+.theme-msdos .preview button[role="switch"].ant-switch .ant-switch-handle::before {
+  background: #c0c0c0 !important;
+}
+
+.theme-msdos .preview .ant-input,
+.theme-msdos .preview .ant-input-affix-wrapper,
+.theme-msdos .preview .ant-select-selector,
+.theme-msdos .preview .ant-picker {
+  background: #000 !important;
+  color: #c0c0c0 !important;
+  border: 3px solid #9a9a9a !important;
+  box-shadow: none !important;
+}
+
+.theme-msdos .preview .ant-select {
+  border-width: 4px !important;
+  border-style: solid !important;
+  border-color: #9a9a9a !important;
+}
+
+.theme-msdos .preview .ant-select.ant-select-open,
+.theme-msdos .preview .ant-select.ant-select-focused {
+  border-width: 4px !important;
+  border-style: solid !important;
+  border-color: #c0c0c0 !important;
+  box-shadow: none !important;
+}
+
+/* Flatten inner wrappers for Select/DatePicker field */
+.theme-msdos .preview .ant-select .ant-select-content,
+.theme-msdos .preview .ant-select .ant-select-content-has-value,
+.theme-msdos .preview .ant-select .ant-select-selection-search,
+.theme-msdos .preview .ant-select .ant-select-selection-item,
+.theme-msdos .preview .ant-select .ant-select-selection-placeholder,
+.theme-msdos .preview .ant-picker .ant-picker-input,
+.theme-msdos .preview .ant-picker .ant-picker-input > input,
+.theme-msdos .preview .ant-picker .ant-picker-suffix {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* Critical: prevent generic input theme rules from styling Ant Select internal input */
+.theme-msdos .preview .ant-select .ant-select-input,
+.theme-msdos .preview .ant-select .ant-select-selection-search-input,
+.theme-msdos .preview .ant-select input.ant-select-input[type="search"] {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  color: #f2f2f2 !important;
+  caret-color: #f2f2f2 !important;
+}
+
+.theme-msdos .preview .ant-select-dropdown,
+.theme-msdos .preview .ant-picker-dropdown {
+  background: #000 !important;
+  color: #c0c0c0 !important;
+  border: 3px solid #7f7f7f !important;
+  box-shadow: none !important;
+}
+
+.theme-msdos .preview .ant-select-dropdown .ant-select-item,
+.theme-msdos .preview .ant-select-dropdown .ant-select-item-option {
+  background: #000 !important;
+  color: #f0f0f0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.theme-msdos .preview .ant-select-dropdown .ant-select-item-option-content {
+  color: #ffffff !important;
+  text-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.theme-msdos .preview .ant-select-dropdown .ant-select-item-option-active {
+  background: #1c1c1c !important;
+  color: #ffffff !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.theme-msdos .preview .ant-select-dropdown .ant-select-item-option-selected {
+  background: #303030 !important;
+  color: #ffffff !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.theme-msdos .preview .ant-picker-dropdown .ant-picker-panel-layout,
+.theme-msdos .preview .ant-picker-dropdown .ant-picker-panel,
+.theme-msdos .preview .ant-picker-dropdown .ant-picker-header,
+.theme-msdos .preview .ant-picker-dropdown .ant-picker-footer,
+.theme-msdos .preview .ant-picker-dropdown .ant-picker-body,
+.theme-msdos .preview .ant-picker-dropdown .ant-picker-content th,
+.theme-msdos .preview .ant-picker-dropdown .ant-picker-cell,
+.theme-msdos .preview .ant-picker-dropdown .ant-picker-cell-inner {
+  background: #000 !important;
+  color: #c0c0c0 !important;
+  border-color: #3a3a3a !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.theme-msdos .preview .ant-picker-dropdown .ant-picker-header,
+.theme-msdos .preview .ant-picker-dropdown .ant-picker-header-view,
+.theme-msdos .preview .ant-picker-dropdown .ant-picker-header-view button {
+  border: none !important;
+  box-shadow: none !important;
+  background: #000 !important;
+}
+
+.theme-msdos .preview .ant-picker-dropdown .ant-picker-header button {
+  background: #121212 !important;
+  color: #c0c0c0 !important;
+  border: none !important;
+  padding: 0 6px !important;
+  min-width: 28px !important;
+  height: 28px !important;
+  box-shadow: none !important;
+}
+
+.theme-msdos .preview .ant-picker-dropdown .ant-picker-cell .ant-picker-cell-inner {
+  border: 1px solid #2b2b2b !important;
+}
+
+.theme-msdos .preview .ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner,
+.theme-msdos .preview .ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner,
+.theme-msdos .preview .ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
+  background: #2a2a2a !important;
+  color: #f0f0f0 !important;
+  border-color: #9a9a9a !important;
+}
+
+.theme-msdos .preview .ant-picker-dropdown .ant-picker-now-btn {
+  color: #c0c0c0 !important;
+  text-decoration: none !important;
+}
+
+.theme-msdos .preview .form-control::placeholder,
+.theme-msdos .preview input::placeholder,
+.theme-msdos .preview textarea::placeholder {
+  color: #9f9f9f !important;
+  opacity: 1 !important;
+}
+
+/* Portal fallback: when Ant popups render outside .preview (e.g. body portals) */
 .theme-c64 .library-grid {
   grid-template-columns: 1fr;
 }
@@ -1346,6 +1792,107 @@
   ) {
   font-size: 10px !important;
   line-height: 1.3 !important;
+}
+
+.theme-msdos {
+  color: #c0c0c0;
+  font-family: "Px437 IBM VGA8", "VT323", "Consolas", "Lucida Console", monospace;
+  font-size: 24px;
+  line-height: 1.1;
+  letter-spacing: 0.2px;
+  background: #000;
+  border: 3px solid #7f7f7f;
+  box-shadow: inset 0 0 0 2px #2a2a2a;
+}
+
+.theme-msdos .controls,
+.theme-msdos .preview {
+  background: #000;
+  color: #c0c0c0;
+  border: 2px solid #7f7f7f;
+  box-shadow: inset 0 0 0 1px #2a2a2a;
+  font-family: inherit;
+}
+
+.theme-msdos .controls h1,
+.theme-msdos .controls p,
+.theme-msdos .preview :is(h2, h3, p, li, td, th, dt, dd, summary, figcaption, caption) {
+  color: #c0c0c0;
+  text-shadow: none;
+}
+
+.theme-msdos .preview :is(button, input, select, textarea),
+.theme-msdos .edit-toggle,
+.theme-msdos .option-toggle select {
+  font-family: inherit;
+  background: #121212 !important;
+  color: #c0c0c0 !important;
+  border: 2px solid #9a9a9a !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+.theme-msdos .preview :is(button, .btn, .ant-btn, .headless-btn, .MuiButtonBase-root):active {
+  background: #000 !important;
+  border-color: #7f7f7f !important;
+}
+
+.theme-msdos .preview :is(button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, a:focus-visible, summary:focus-visible) {
+  outline: 2px solid #c0c0c0 !important;
+  outline-offset: 2px;
+  box-shadow: none !important;
+}
+
+.theme-msdos .preview :is(.card, .data-table th, .data-table td, .data-table caption, blockquote, details, pre, .form-grid fieldset, .demo-dialog, .headless-panel, .headless-menu-items) {
+  border: 2px solid #7f7f7f !important;
+  background: #000 !important;
+  color: #c0c0c0 !important;
+  box-shadow: none !important;
+}
+
+.theme-msdos .preview img {
+  filter: grayscale(1) contrast(1.2) brightness(0.85);
+  transform: none;
+}
+
+.theme-msdos .preview .MuiRating-iconFilled,
+.theme-msdos .preview .MuiRating-iconHover,
+.theme-msdos .preview .MuiRating-iconFocus {
+  color: #c0c0c0 !important;
+}
+
+.theme-msdos .preview .MuiRating-iconEmpty {
+  color: #5a5a5a !important;
+}
+
+.theme-msdos .preview :is(.MuiTabs-indicator, .MuiLinearProgress-bar, .ant-progress-bg, .ant-progress-success-bg, .progress-bar) {
+  background: #c0c0c0 !important;
+}
+
+.theme-msdos .preview :is(.MuiLinearProgress-root, .ant-progress-inner, .progress) {
+  background: #1a1a1a !important;
+  border: 2px solid #7f7f7f !important;
+}
+
+.theme-msdos .preview :is(.btn, .btn-primary, .btn-outline-light, .form-control, .alert, .card, .ant-btn, .ant-input, .ant-input-affix-wrapper, .ant-select-selector, .ant-picker) {
+  background: #000 !important;
+  color: #c0c0c0 !important;
+  border: 2px solid #9a9a9a !important;
+  box-shadow: none !important;
+}
+
+.theme-msdos .preview .headless-switch.off {
+  background: #101010 !important;
+  border-color: #7f7f7f !important;
+}
+
+.theme-msdos .preview .headless-switch.on {
+  background: #2a2a2a !important;
+  border-color: #c0c0c0 !important;
+}
+
+.theme-msdos .preview .headless-switch-thumb {
+  background: #c0c0c0 !important;
 }
 
 .editable-node {
@@ -1382,7 +1929,8 @@
 }
 
 .theme-crt .terminal-heading::after,
-.theme-c64 .terminal-heading::after {
+.theme-c64 .terminal-heading::after,
+.theme-msdos .terminal-heading::after {
   content: "_";
   margin-left: 0.2ch;
   animation: terminal-caret-blink 0.95s steps(1, end) infinite;

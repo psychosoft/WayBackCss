@@ -48,7 +48,7 @@ import {
   ProgressBar as RbProgressBar,
 } from "react-bootstrap";
 
-type ThemeMode = "default" | "crt" | "c64";
+type ThemeMode = "default" | "crt" | "c64" | "msdos";
 
 function App() {
   const [editMode, setEditMode] = useState(false);
@@ -66,6 +66,7 @@ function App() {
     default: { text: "#0f172a", background: "#e2e8f0" },
     crt: { text: "#bbffbb", background: "#0f2314" },
     c64: { text: "#8f97ff", background: "#40318d" },
+    msdos: { text: "#c0c0c0", background: "#000000" },
   };
 
   const { text: textColor, background: backgroundColor } = themeColors[theme];
@@ -177,6 +178,49 @@ function App() {
           Switch: {
             colorPrimary: "#aab0ff",
             colorPrimaryHover: "#c6cbff",
+          },
+        },
+      };
+    }
+
+    if (theme === "msdos") {
+      return {
+        token: {
+          colorPrimary: "#c0c0c0",
+          colorInfo: "#c0c0c0",
+          colorSuccess: "#c0c0c0",
+          colorBgBase: "#000000",
+          colorBgContainer: "#050505",
+          colorTextBase: "#c0c0c0",
+          colorText: "#c0c0c0",
+          colorBorder: "#a0a0a0",
+          borderRadius: 0,
+          fontFamily: "'Px437 IBM VGA8', VT323, Consolas, 'Lucida Console', monospace",
+          fontSize: 24,
+          lineHeight: 1.08,
+        },
+        components: {
+          Tabs: {
+            inkBarColor: "#c0c0c0",
+            itemActiveColor: "#c0c0c0",
+            itemSelectedColor: "#c0c0c0",
+          },
+          Button: {
+            defaultBg: "#000000",
+            defaultColor: "#c0c0c0",
+            defaultBorderColor: "#a0a0a0",
+          },
+          Progress: {
+            defaultColor: "#c0c0c0",
+            remainingColor: "#1a1a1a",
+          },
+          Slider: {
+            trackBg: "#c0c0c0",
+            railBg: "#1a1a1a",
+            handleColor: "#c0c0c0",
+          },
+          Switch: {
+            colorPrimary: "#c0c0c0",
           },
         },
       };
@@ -385,6 +429,105 @@ function App() {
       });
     }
 
+    if (theme === "msdos") {
+      return createTheme({
+        palette: {
+          mode: "dark",
+          primary: { main: "#c0c0c0" },
+          success: { main: "#c0c0c0" },
+          text: { primary: "#c0c0c0", secondary: "#8a8a8a" },
+          background: { default: "#000000", paper: "#020202" },
+        },
+        typography: {
+          fontFamily: "'Px437 IBM VGA8', VT323, Consolas, 'Lucida Console', monospace",
+          fontSize: 21,
+        },
+        shape: { borderRadius: 0 },
+        components: {
+          MuiAlert: {
+            styleOverrides: {
+              root: {
+                backgroundColor: "#000000",
+                color: "#c0c0c0",
+                border: "2px solid #a0a0a0",
+              },
+            },
+          },
+          MuiChip: {
+            styleOverrides: {
+              root: {
+                backgroundColor: "#000000",
+                color: "#c0c0c0",
+                border: "2px solid #a0a0a0",
+              },
+            },
+          },
+          MuiSwitch: {
+            styleOverrides: {
+              switchBase: {
+                color: "#c0c0c0",
+                "&.Mui-checked": { color: "#c0c0c0" },
+              },
+              track: {
+                backgroundColor: "#1a1a1a",
+                opacity: 1,
+              },
+            },
+          },
+          MuiAccordion: {
+            styleOverrides: {
+              root: {
+                backgroundColor: "#000000",
+                color: "#c0c0c0",
+                border: "2px solid #a0a0a0",
+              },
+            },
+          },
+          MuiOutlinedInput: {
+            styleOverrides: {
+              root: {
+                color: "#c0c0c0",
+                backgroundColor: "#000000",
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#a0a0a0",
+                },
+                "&:hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#a0a0a0",
+                },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#c0c0c0",
+                },
+              },
+            },
+          },
+          MuiInputLabel: {
+            styleOverrides: {
+              root: { color: "#c0c0c0" },
+            },
+          },
+          MuiTabs: {
+            styleOverrides: {
+              indicator: { backgroundColor: "#c0c0c0" },
+            },
+          },
+          MuiTab: {
+            styleOverrides: {
+              root: {
+                color: "#8a8a8a",
+                "&.Mui-selected": { color: "#c0c0c0" },
+              },
+            },
+          },
+          MuiLinearProgress: {
+            styleOverrides: {
+              root: { backgroundColor: "#1a1a1a" },
+              bar: { backgroundColor: "#c0c0c0" },
+            },
+          },
+        },
+      });
+    }
+
     return createTheme();
   }, [theme]);
 
@@ -422,6 +565,7 @@ function App() {
             <option value="default">Default</option>
             <option value="crt">CRT Terminal</option>
             <option value="c64">Commodore 64</option>
+            <option value="msdos">MS-DOS</option>
           </select>
         </label>
         <label className="option-toggle">
