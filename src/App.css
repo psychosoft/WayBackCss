@@ -133,8 +133,66 @@
   font-weight: 600;
 }
 
+.option-toggle-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
 .option-toggle input[type="checkbox"] {
   margin-right: 0.45rem;
+}
+
+.option-toggle-inline input[type="checkbox"] {
+  margin-right: 0;
+}
+
+.controls .option-toggle input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #475569;
+  background: #ffffff;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+}
+
+.controls .option-toggle input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: #0f172a;
+}
+
+.theme-crt .controls .option-toggle input[type="checkbox"] {
+  border-color: #86ff9d;
+  background: #1f3525;
+}
+
+.theme-crt .controls .option-toggle input[type="checkbox"]:checked::after {
+  background: #a7ffb6;
+}
+
+.theme-c64 .controls .option-toggle input[type="checkbox"] {
+  border-color: #aab0ff;
+  background: #4d5ac4;
+}
+
+.theme-c64 .controls .option-toggle input[type="checkbox"]:checked::after {
+  background: #eef0ff;
+}
+
+.theme-msdos .controls .option-toggle input[type="checkbox"] {
+  border-color: #9a9a9a;
+  background: #121212;
+}
+
+.theme-msdos .controls .option-toggle input[type="checkbox"]:checked::after {
+  background: #d8d8d8;
 }
 
 .option-toggle select {
@@ -619,7 +677,7 @@
   width: 12px;
   height: 12px;
   margin: 0 0.35rem 0 0;
-  border: 0 !important;
+  border: 1px solid currentColor !important;
   border-radius: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
@@ -850,6 +908,7 @@
 }
 
 .theme-crt .preview input[type="checkbox"] {
+  border-color: #a7ffb6 !important;
   background: #17281b !important;
 }
 
@@ -1047,13 +1106,15 @@
 
 .theme-c64 .preview img {
   image-rendering: pixelated;
-  filter: saturate(0.9) contrast(1.05) brightness(0.95);
-  transform: none;
+  filter: grayscale(1) sepia(1) hue-rotate(195deg) saturate(2.2) brightness(0.86)
+    contrast(1.12) !important;
+  transform: none !important;
 }
 
 .theme-c64 .preview img:hover {
-  filter: saturate(1) contrast(1.1) brightness(1);
-  transform: scale(1.01);
+  filter: grayscale(1) sepia(1) hue-rotate(195deg) saturate(2.45) brightness(0.9)
+    contrast(1.16) !important;
+  transform: scale(1.01) !important;
 }
 
 /* Bootstrap overrides in C64 theme */
@@ -1144,11 +1205,21 @@
 }
 
 .theme-c64 .preview input[type="checkbox"] {
+  border-color: #c3c8ff !important;
   background: #4d5ac4 !important;
 }
 
 .theme-c64 .preview input[type="checkbox"]:checked::after {
   background: #aab0ff !important;
+}
+
+.theme-msdos .preview input[type="checkbox"] {
+  border-color: #d8d8d8 !important;
+  background: #121212 !important;
+}
+
+.theme-msdos .preview input[type="checkbox"]:checked::after {
+  background: #d8d8d8 !important;
 }
 
 .theme-c64 .preview input[type="date"] {
@@ -1279,9 +1350,16 @@
   border-radius: 0 !important;
 }
 
+.theme-crt .preview .ant-slider-handle::after,
+.theme-crt .preview .ant-slider-handle::before {
+  background: #86ff9d !important;
+  border-color: #86ff9d !important;
+}
+
 .theme-crt .preview .progress {
   background-color: #2f4f35 !important;
   border: 2px solid #86ff9d !important;
+  height: 24px !important;
 }
 
 .theme-crt .preview .progress-bar {
@@ -1289,6 +1367,12 @@
   color: #0a220f !important;
   border: 2px solid #86ff9d !important;
   box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  font-size: 14px !important;
+  overflow: visible !important;
 }
 
 .theme-c64 .preview .ant-progress .ant-progress-bg,
@@ -1306,9 +1390,16 @@
   border-radius: 0 !important;
 }
 
+.theme-c64 .preview .ant-slider-handle::after,
+.theme-c64 .preview .ant-slider-handle::before {
+  background: #aab0ff !important;
+  border-color: #aab0ff !important;
+}
+
 .theme-c64 .preview .progress {
   background-color: #5964c7 !important;
   border: 2px solid #aab0ff !important;
+  height: 24px !important;
 }
 
 .theme-c64 .preview .progress-bar {
@@ -1316,6 +1407,12 @@
   color: #30367a !important;
   border: 2px solid #aab0ff !important;
   box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  font-size: 14px !important;
+  overflow: visible !important;
 }
 
 .theme-crt .preview .ant-input,
@@ -1385,6 +1482,18 @@
 .theme-c64 .preview .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
   box-shadow: none !important;
   background-image: none !important;
+}
+
+.theme-crt .preview .ant-select-focused,
+.theme-crt .preview .ant-select-open {
+  border-color: #a7ffb6 !important;
+  box-shadow: none !important;
+}
+
+.theme-c64 .preview .ant-select-focused,
+.theme-c64 .preview .ant-select-open {
+  border-color: #c3c8ff !important;
+  box-shadow: none !important;
 }
 
 .theme-crt .preview .ant-select:not(.ant-select-customize-input) .ant-select-selector {
@@ -1577,6 +1686,25 @@
   color: #cfd5ff !important;
 }
 
+/* MUI closed select field colors (not the opened menu panel) */
+.theme-crt .mui-lab .MuiFormControl-root .MuiOutlinedInput-root,
+.theme-crt .mui-lab .MuiSelect-select {
+  background: #1f3525 !important;
+  color: #bbffbb !important;
+}
+
+.theme-c64 .mui-lab .MuiFormControl-root .MuiOutlinedInput-root,
+.theme-c64 .mui-lab .MuiSelect-select {
+  background: #4d5ac4 !important;
+  color: #cfd5ff !important;
+}
+
+.theme-msdos .mui-lab .MuiFormControl-root .MuiOutlinedInput-root,
+.theme-msdos .mui-lab .MuiSelect-select {
+  background: #121212 !important;
+  color: #c0c0c0 !important;
+}
+
 /* Ant Design overrides in MS-DOS theme */
 .theme-msdos .preview .ant-alert-info {
   background: #000 !important;
@@ -1627,16 +1755,16 @@
 }
 
 .theme-msdos .preview .ant-select {
-  border-width: 4px !important;
+  border-width: 2px !important;
   border-style: solid !important;
   border-color: #9a9a9a !important;
 }
 
 .theme-msdos .preview .ant-select.ant-select-open,
 .theme-msdos .preview .ant-select.ant-select-focused {
-  border-width: 4px !important;
+  border-width: 2px !important;
   border-style: solid !important;
-  border-color: #c0c0c0 !important;
+  border-color: #d8d8d8 !important;
   box-shadow: none !important;
 }
 
@@ -1758,6 +1886,19 @@
   text-decoration: none !important;
 }
 
+.theme-msdos .preview .ant-slider-handle,
+.theme-msdos .preview .ant-slider-handle::before,
+.theme-msdos .preview .ant-slider-handle::after {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.theme-msdos .preview .ant-slider-handle::after,
+.theme-msdos .preview .ant-slider-handle::before {
+  background: #d8d8d8 !important;
+  border-color: #d8d8d8 !important;
+}
+
 .theme-msdos .preview .form-control::placeholder,
 .theme-msdos .preview input::placeholder,
 .theme-msdos .preview textarea::placeholder {
@@ -1869,9 +2010,20 @@
   background: #c0c0c0 !important;
 }
 
+.theme-msdos .preview .progress-bar {
+  color: #101010 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  font-size: 14px !important;
+  overflow: visible !important;
+}
+
 .theme-msdos .preview :is(.MuiLinearProgress-root, .ant-progress-inner, .progress) {
   background: #1a1a1a !important;
   border: 2px solid #7f7f7f !important;
+  height: 24px !important;
 }
 
 .theme-msdos .preview :is(.btn, .btn-primary, .btn-outline-light, .form-control, .alert, .card, .ant-btn, .ant-input, .ant-input-affix-wrapper, .ant-select-selector, .ant-picker) {
@@ -1919,8 +2071,9 @@
 }
 
 .terminal-typed {
-  overflow: hidden;
-  white-space: nowrap;
+  overflow: visible;
+  white-space: normal;
+  overflow-wrap: anywhere;
   display: block;
   max-width: 100%;
   clip-path: inset(0 100% 0 0);

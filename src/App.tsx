@@ -64,7 +64,7 @@ function App() {
 
   const themeColors: Record<ThemeMode, { text: string; background: string }> = {
     default: { text: "#0f172a", background: "#e2e8f0" },
-    crt: { text: "#bbffbb", background: "#0f2314" },
+    crt: { text: "#c8ffd2", background: "#122a18" },
     c64: { text: "#8f97ff", background: "#40318d" },
     msdos: { text: "#c0c0c0", background: "#000000" },
   };
@@ -311,6 +311,37 @@ function App() {
               indicator: { backgroundColor: "#86ff9d" },
             },
           },
+          MuiMenu: {
+            styleOverrides: {
+              paper: {
+                backgroundColor: "#1f3525",
+                color: "#bbffbb",
+                border: "2px solid #86ff9d",
+              },
+              list: {
+                backgroundColor: "#1f3525",
+                color: "#bbffbb",
+              },
+            },
+          },
+          MuiMenuItem: {
+            styleOverrides: {
+              root: {
+                backgroundColor: "#1f3525",
+                color: "#bbffbb",
+                "&.Mui-selected": {
+                  backgroundColor: "#2a4632",
+                  color: "#deffde",
+                },
+                "&.Mui-selected:hover": {
+                  backgroundColor: "#31533a",
+                },
+                "&:hover": {
+                  backgroundColor: "#27412e",
+                },
+              },
+            },
+          },
           MuiTab: {
             styleOverrides: {
               root: {
@@ -411,6 +442,37 @@ function App() {
               indicator: { backgroundColor: "#aab0ff" },
             },
           },
+          MuiMenu: {
+            styleOverrides: {
+              paper: {
+                backgroundColor: "#4d5ac4",
+                color: "#cfd5ff",
+                border: "2px solid #aab0ff",
+              },
+              list: {
+                backgroundColor: "#4d5ac4",
+                color: "#cfd5ff",
+              },
+            },
+          },
+          MuiMenuItem: {
+            styleOverrides: {
+              root: {
+                backgroundColor: "#4d5ac4",
+                color: "#cfd5ff",
+                "&.Mui-selected": {
+                  backgroundColor: "#5f6cd3",
+                  color: "#eef0ff",
+                },
+                "&.Mui-selected:hover": {
+                  backgroundColor: "#6976dd",
+                },
+                "&:hover": {
+                  backgroundColor: "#5966ce",
+                },
+              },
+            },
+          },
           MuiTab: {
             styleOverrides: {
               root: {
@@ -487,7 +549,7 @@ function App() {
             styleOverrides: {
               root: {
                 color: "#c0c0c0",
-                backgroundColor: "#000000",
+                backgroundColor: "#121212",
                 "& .MuiOutlinedInput-notchedOutline": {
                   borderColor: "#a0a0a0",
                 },
@@ -508,6 +570,37 @@ function App() {
           MuiTabs: {
             styleOverrides: {
               indicator: { backgroundColor: "#c0c0c0" },
+            },
+          },
+          MuiMenu: {
+            styleOverrides: {
+              paper: {
+                backgroundColor: "#000000",
+                color: "#c0c0c0",
+                border: "2px solid #a0a0a0",
+              },
+              list: {
+                backgroundColor: "#000000",
+                color: "#c0c0c0",
+              },
+            },
+          },
+          MuiMenuItem: {
+            styleOverrides: {
+              root: {
+                backgroundColor: "#000000",
+                color: "#c0c0c0",
+                "&.Mui-selected": {
+                  backgroundColor: "#2a2a2a",
+                  color: "#f0f0f0",
+                },
+                "&.Mui-selected:hover": {
+                  backgroundColor: "#333333",
+                },
+                "&:hover": {
+                  backgroundColor: "#1a1a1a",
+                },
+              },
             },
           },
           MuiTab: {
@@ -531,11 +624,6 @@ function App() {
     return createTheme();
   }, [theme]);
 
-  const cssPreview = useMemo(
-    () => `color: ${textColor}; background-color: ${backgroundColor};`,
-    [backgroundColor, textColor]
-  );
-
   return (
     <main className={`page theme-${theme}`}>
       <section className="controls">
@@ -548,7 +636,7 @@ function App() {
         >
           {editMode ? "Disable edit mode" : "Enable edit mode"}
         </button>
-        <label className="option-toggle">
+        <label className="option-toggle option-toggle-inline">
           <input
             type="checkbox"
             checked={transparentChildren}
@@ -568,7 +656,7 @@ function App() {
             <option value="msdos">MS-DOS</option>
           </select>
         </label>
-        <label className="option-toggle">
+        <label className="option-toggle option-toggle-inline">
           <input
             type="checkbox"
             checked={textAnimation}
@@ -576,7 +664,6 @@ function App() {
           />
           Terminal typing animation
         </label>
-        <code>{cssPreview}</code>
       </section>
 
       <StyleInjector
