@@ -22,9 +22,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-# Playwright / Chromium artifacts
-screenshots/
-playwright-report/
-test-results/
-*.trace

@@ -382,6 +382,95 @@
   min-width: 0;
 }
 
+/* React Bootstrap baseline alignment in preview cards */
+.preview .dropdown-toggle,
+.preview .dropdown-menu,
+.preview .dropdown-item {
+  font-family: inherit !important;
+  font-size: 1em !important;
+}
+
+.preview .dropdown-menu {
+  border-width: 2px !important;
+}
+
+.preview .dropdown-item {
+  border: 2px solid transparent !important;
+}
+
+.preview .form-check {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.4rem;
+  margin-right: 0.85rem;
+}
+
+.preview .form-check-input {
+  margin-top: 0 !important;
+  margin-left: 0 !important;
+  float: none !important;
+  flex: 0 0 auto;
+}
+
+.preview .form-check-label {
+  margin-bottom: 0 !important;
+}
+
+.preview .accordion-button {
+  justify-content: center;
+  text-align: center;
+}
+
+.preview .accordion-button,
+.preview .accordion-body {
+  font-family: inherit !important;
+  font-size: 1em !important;
+  line-height: 1.2 !important;
+}
+
+.preview .accordion,
+.preview .accordion-item,
+.preview .accordion-button,
+.preview .accordion-collapse,
+.preview .accordion-body {
+  border-width: 1px !important;
+}
+
+.preview .accordion {
+  --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230f172a'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  --bs-accordion-btn-active-icon: var(--bs-accordion-btn-icon);
+}
+
+.preview .rb-check-group {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.35rem;
+  margin: 0.4rem 0 0.2rem;
+}
+
+.preview .rb-check-line {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.45rem;
+  width: max-content;
+  max-width: 100%;
+  margin: 0 !important;
+}
+
+.preview .rb-check-line .form-check-input {
+  width: 14px;
+  height: 14px;
+  margin: 0 !important;
+  flex: 0 0 auto;
+}
+
+.preview .rb-check-line .form-check-label {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.2;
+  margin: 0 !important;
+}
+
 .library-grid > *,
 .card-grid > *,
 .media-grid > *,
@@ -419,11 +508,77 @@
   border-width: 2px !important;
 }
 
+.mui-lab .MuiAutocomplete-root .MuiOutlinedInput-notchedOutline {
+  border-width: 2px !important;
+}
+
 .mui-lab .MuiSelect-outlined:hover .MuiOutlinedInput-notchedOutline,
 .mui-lab .MuiFormControl-root .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline,
 .mui-lab .MuiSelect-outlined.Mui-focused .MuiOutlinedInput-notchedOutline,
 .mui-lab .MuiFormControl-root .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
   border-width: 3px !important;
+}
+
+.mui-lab .MuiAutocomplete-root:hover .MuiOutlinedInput-notchedOutline,
+.mui-lab .MuiAutocomplete-root .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-width: 3px !important;
+}
+
+.mui-lab .MuiAutocomplete-endAdornment,
+.mui-lab .MuiAutocomplete-endAdornment .MuiButtonBase-root,
+.mui-lab .MuiAutocomplete-popupIndicator,
+.mui-lab .MuiAutocomplete-clearIndicator {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+.mui-lab .MuiAutocomplete-endAdornment {
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  right: 8px !important;
+}
+
+.mui-lab .MuiAutocomplete-popupIndicator {
+  padding: 0 !important;
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.mui-lab .MuiAutocomplete-root .MuiInputBase-input,
+.mui-lab .MuiAutocomplete-root .MuiInputBase-inputSizeSmall,
+.mui-lab .MuiAutocomplete-root input.MuiInputBase-input {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.mui-lab .MuiAutocomplete-root .MuiIconButton-root,
+.mui-lab .MuiAutocomplete-root .MuiButtonBase-root.MuiIconButton-root {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  min-width: auto !important;
+}
+
+.mui-lab .MuiToggleButtonGroup-root,
+.mui-lab .MuiToggleButton-root,
+.mui-lab .MuiAutocomplete-popper .MuiPaper-root,
+.mui-lab .MuiAutocomplete-popper .MuiAutocomplete-listbox,
+.mui-lab .MuiAutocomplete-popper .MuiAutocomplete-option {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+.mui-lab .MuiToggleButton-root {
+  border-width: 2px !important;
 }
 
 .headless-btn {
@@ -652,13 +807,13 @@
   box-shadow: none !important;
 }
 
-.preview input[type="radio"] {
+.preview input[type="radio"]:not(.ant-radio-input) {
   -webkit-appearance: none;
   appearance: none;
   width: 12px;
   height: 12px;
   margin: 0 0.35rem 0 0;
-  border: 0 !important;
+  border: 2px solid currentColor !important;
   border-radius: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
@@ -667,8 +822,19 @@
   cursor: pointer;
 }
 
-.preview input[type="radio"]:checked {
+.preview input[type="radio"]:not(.ant-radio-input):checked {
   background: currentColor !important;
+  border-color: currentColor !important;
+}
+
+.preview .ant-radio-input {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  opacity: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 .preview input[type="checkbox"]:not(.MuiSwitch-input):not(.PrivateSwitchBase-input) {
@@ -689,10 +855,91 @@
 
 .preview
   input[type="checkbox"]:not(.MuiSwitch-input):not(.PrivateSwitchBase-input):checked::after {
-  content: "";
-  position: absolute;
-  inset: 2px;
-  background: currentColor;
+  display: none;
+}
+
+.preview input[type="checkbox"]:not(.MuiSwitch-input):not(.PrivateSwitchBase-input):checked {
+  background: currentColor !important;
+  border-color: currentColor !important;
+}
+
+/* React Bootstrap native controls: same square filled behavior */
+.preview .form-check-input[type="checkbox"],
+.preview .form-check-input[type="radio"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+.preview .form-check-input[type="checkbox"]:checked,
+.preview .form-check-input[type="radio"]:checked {
+  background: currentColor !important;
+  border-color: currentColor !important;
+  background-image: none !important;
+}
+
+/* Ant Design controls: remove ring/check marks, keep single filled square */
+.preview .ant-checkbox-inner,
+.preview .ant-radio-inner {
+  border-radius: 0 !important;
+  border: 2px solid currentColor !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.preview .ant-radio,
+.preview .ant-radio-wrapper {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.preview .ant-checkbox-inner::after,
+.preview .ant-radio-inner::after {
+  display: none !important;
+}
+
+.preview .ant-radio.ant-wave-target::after {
+  display: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.preview .ant-checkbox-checked .ant-checkbox-inner,
+.preview .ant-radio-checked .ant-radio-inner {
+  background: currentColor !important;
+  border-color: currentColor !important;
+}
+
+/* MUI controls: hide icon ring/check glyphs and render square fill */
+.preview .MuiCheckbox-root,
+.preview .MuiRadio-root {
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+  min-height: 14px !important;
+  padding: 0 !important;
+  margin-right: 6px !important;
+  border: 2px solid currentColor !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.preview .MuiCheckbox-root .MuiSvgIcon-root,
+.preview .MuiRadio-root .MuiSvgIcon-root {
+  display: none !important;
+}
+
+.preview .MuiCheckbox-root.Mui-checked,
+.preview .MuiRadio-root.Mui-checked {
+  background: currentColor !important;
+  border-color: currentColor !important;
 }
 
 .preview progress {
@@ -849,6 +1096,32 @@
   color: #deffde !important;
 }
 
+.theme-crt .preview .dropdown-menu,
+.theme-crt .preview .dropdown-item,
+.theme-crt .preview .accordion,
+.theme-crt .preview .accordion-item,
+.theme-crt .preview .accordion-header,
+.theme-crt .preview .accordion-button,
+.theme-crt .preview .accordion-body,
+.theme-crt .preview .list-group-item {
+  background: #1f3525 !important;
+  color: #bbffbb !important;
+  border-color: #86ff9d !important;
+  box-shadow: none !important;
+}
+
+.theme-crt .preview .dropdown-item:hover,
+.theme-crt .preview .accordion-button:not(.collapsed),
+.theme-crt .preview .list-group-item.active {
+  background: #2d4b34 !important;
+  color: #e4ffe9 !important;
+}
+
+.theme-crt .preview .accordion {
+  --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2386ff9d'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  --bs-accordion-btn-active-icon: var(--bs-accordion-btn-icon);
+}
+
 .theme-crt .preview .nav-tabs {
   border-bottom-color: #86ff9d !important;
 }
@@ -872,6 +1145,17 @@
 .theme-crt .preview .btn-outline-light,
 .theme-crt .preview .form-control {
   border-color: #86ff9d !important;
+}
+
+.theme-crt .preview select,
+.theme-crt .preview .dropdown-toggle,
+.theme-crt .preview .dropdown-menu,
+.theme-crt .preview .dropdown-item,
+.theme-crt .preview .ant-select-selection-item,
+.theme-crt .preview .ant-select-item-option-content,
+.theme-crt .preview .MuiSelect-select {
+  font-size: 18px !important;
+  line-height: 1.1 !important;
 }
 
 .theme-crt .preview .btn,
@@ -944,11 +1228,24 @@
 
 .theme-crt .MuiChip-root,
 .theme-crt .MuiChip-label,
+.theme-crt .MuiToggleButton-root,
 .theme-crt .MuiSlider-thumb,
 .theme-crt .MuiSlider-valueLabel,
 .theme-crt .MuiSlider-rail,
 .theme-crt .MuiSlider-track {
   border-radius: 0 !important;
+}
+
+.theme-crt .MuiToggleButton-root {
+  background: #1f3525 !important;
+  color: #bbffbb !important;
+  border-color: #86ff9d !important;
+}
+
+.theme-crt .MuiToggleButton-root.Mui-selected {
+  background: #2d4b34 !important;
+  color: #e3ffe8 !important;
+  border-color: #a7ffb6 !important;
 }
 
 .theme-crt .MuiChip-root {
@@ -1056,11 +1353,24 @@
 
 .theme-c64 .MuiChip-root,
 .theme-c64 .MuiChip-label,
+.theme-c64 .MuiToggleButton-root,
 .theme-c64 .MuiSlider-thumb,
 .theme-c64 .MuiSlider-valueLabel,
 .theme-c64 .MuiSlider-rail,
 .theme-c64 .MuiSlider-track {
   border-radius: 0 !important;
+}
+
+.theme-c64 .MuiToggleButton-root {
+  background: #4d5ac4 !important;
+  color: #cfd5ff !important;
+  border-color: #aab0ff !important;
+}
+
+.theme-c64 .MuiToggleButton-root.Mui-selected {
+  background: #6470d8 !important;
+  color: #eef0ff !important;
+  border-color: #c6cbff !important;
 }
 
 .theme-c64 .MuiChip-root {
@@ -1142,6 +1452,48 @@
 .theme-c64 .preview .badge {
   background: #6f78df !important;
   color: #eef0ff !important;
+}
+
+.theme-c64 .preview .dropdown-menu,
+.theme-c64 .preview .dropdown-item,
+.theme-c64 .preview .accordion,
+.theme-c64 .preview .accordion-item,
+.theme-c64 .preview .accordion-header,
+.theme-c64 .preview .accordion-button,
+.theme-c64 .preview .accordion-body,
+.theme-c64 .preview .list-group-item {
+  background: #4d5ac4 !important;
+  color: #cfd5ff !important;
+  border-color: #aab0ff !important;
+  box-shadow: none !important;
+}
+
+.theme-c64 .preview .dropdown-item {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.theme-c64 .preview .dropdown-item:hover,
+.theme-c64 .preview .accordion-button:not(.collapsed),
+.theme-c64 .preview .list-group-item.active {
+  background: #6470d8 !important;
+  color: #eef0ff !important;
+}
+
+.theme-c64 .preview .accordion-button,
+.theme-c64 .preview .accordion-body {
+  font-size: 12px !important;
+  line-height: 1.35 !important;
+}
+
+.theme-c64 .preview .list-group-item {
+  border-width: 2px !important;
+}
+
+.theme-c64 .preview .accordion {
+  --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23aab0ff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  --bs-accordion-btn-active-icon: var(--bs-accordion-btn-icon);
 }
 
 .theme-c64 .preview .nav-tabs {
@@ -1688,21 +2040,48 @@
 
 /* MUI closed select field colors (not the opened menu panel) */
 .theme-crt .mui-lab .MuiFormControl-root .MuiOutlinedInput-root,
-.theme-crt .mui-lab .MuiSelect-select {
+.theme-crt .mui-lab .MuiSelect-select,
+.theme-crt .mui-lab .MuiAutocomplete-root .MuiOutlinedInput-root {
   background: #1f3525 !important;
   color: #bbffbb !important;
 }
 
 .theme-c64 .mui-lab .MuiFormControl-root .MuiOutlinedInput-root,
-.theme-c64 .mui-lab .MuiSelect-select {
+.theme-c64 .mui-lab .MuiSelect-select,
+.theme-c64 .mui-lab .MuiAutocomplete-root .MuiOutlinedInput-root {
   background: #4d5ac4 !important;
   color: #cfd5ff !important;
 }
 
 .theme-msdos .mui-lab .MuiFormControl-root .MuiOutlinedInput-root,
-.theme-msdos .mui-lab .MuiSelect-select {
+.theme-msdos .mui-lab .MuiSelect-select,
+.theme-msdos .mui-lab .MuiAutocomplete-root .MuiOutlinedInput-root {
   background: #121212 !important;
   color: #c0c0c0 !important;
+}
+
+.theme-crt .mui-lab .MuiAutocomplete-popper .MuiPaper-root,
+.theme-crt .mui-lab .MuiAutocomplete-popper .MuiAutocomplete-listbox,
+.theme-crt .mui-lab .MuiAutocomplete-popper .MuiAutocomplete-option {
+  background: #1f3525 !important;
+  color: #bbffbb !important;
+  border-color: #86ff9d !important;
+}
+
+.theme-c64 .mui-lab .MuiAutocomplete-popper .MuiPaper-root,
+.theme-c64 .mui-lab .MuiAutocomplete-popper .MuiAutocomplete-listbox,
+.theme-c64 .mui-lab .MuiAutocomplete-popper .MuiAutocomplete-option {
+  background: #4d5ac4 !important;
+  color: #cfd5ff !important;
+  border-color: #aab0ff !important;
+}
+
+.theme-msdos .mui-lab .MuiAutocomplete-popper .MuiPaper-root,
+.theme-msdos .mui-lab .MuiAutocomplete-popper .MuiAutocomplete-listbox,
+.theme-msdos .mui-lab .MuiAutocomplete-popper .MuiAutocomplete-option {
+  background: #000 !important;
+  color: #c0c0c0 !important;
+  border-color: #9a9a9a !important;
 }
 
 /* Ant Design overrides in MS-DOS theme */
@@ -1744,14 +2123,209 @@
   background: #c0c0c0 !important;
 }
 
+.preview .ant-segmented,
+.preview .ant-segmented-group,
+.preview .ant-segmented-item,
+.preview .ant-segmented-thumb {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+.preview .ant-segmented {
+  padding: 0 !important;
+  overflow: hidden !important;
+  border: 2px solid currentColor !important;
+}
+
+.preview .ant-segmented-group {
+  gap: 0 !important;
+}
+
+.preview .ant-segmented-thumb {
+  display: none !important;
+}
+
+.preview .ant-segmented-item {
+  margin: 0 !important;
+  border: 0 !important;
+}
+
+.preview .ant-segmented-item:last-child {
+  border: 0 !important;
+}
+
+.preview .ant-input-number,
+.preview .ant-input-number-input-wrap,
+.preview .ant-input-number-input,
+.preview .ant-input-number-actions,
+.preview .ant-input-number-handler-wrap,
+.preview .ant-input-number-action,
+.preview .ant-input-number-action-up,
+.preview .ant-input-number-action-down {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+.preview .ant-input-number-input,
+.preview .ant-input-number-input:focus {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.preview .ant-input-number {
+  border-width: 2px !important;
+}
+
+.preview .ant-input-number-actions,
+.preview .ant-input-number-handler-wrap,
+.preview .ant-input-number-action,
+.preview .ant-input-number-action-up,
+.preview .ant-input-number-action-down {
+  border: none !important;
+  border-inline-start: 0 !important;
+}
+
+.preview .ant-input-number-action-up,
+.preview .ant-input-number-action-down {
+  min-width: 22px !important;
+}
+
+.preview .ant-input-number-action .anticon {
+  font-size: 14px !important;
+  line-height: 1 !important;
+}
+
+.preview .ant-input-number-action .anticon svg {
+  width: 1.15em !important;
+  height: 1.15em !important;
+  transform: scale(1.15);
+  transform-origin: center;
+}
+
+.theme-crt .preview .ant-segmented,
+.theme-crt .preview .ant-segmented-group,
+.theme-crt .preview .ant-segmented-item,
+.theme-crt .preview .ant-segmented-thumb,
+.theme-c64 .preview .ant-segmented,
+.theme-c64 .preview .ant-segmented-group,
+.theme-c64 .preview .ant-segmented-item,
+.theme-c64 .preview .ant-segmented-thumb,
+.theme-msdos .preview .ant-segmented,
+.theme-msdos .preview .ant-segmented-group,
+.theme-msdos .preview .ant-segmented-item,
+.theme-msdos .preview .ant-segmented-thumb {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+.theme-crt .preview .ant-segmented {
+  background: #1f3525 !important;
+  border: 2px solid #86ff9d !important;
+}
+
+.theme-crt .preview .ant-segmented-item {
+  color: #bbffbb !important;
+}
+
+.theme-crt .preview .ant-segmented-item-selected {
+  background: #2d4b34 !important;
+  color: #deffde !important;
+}
+
+.theme-c64 .preview .ant-segmented {
+  background: #4d5ac4 !important;
+  border: 2px solid #aab0ff !important;
+}
+
+.theme-c64 .preview .ant-segmented-item {
+  color: #cfd5ff !important;
+}
+
+.theme-c64 .preview .ant-segmented-item-selected {
+  background: #6470d8 !important;
+  color: #eef0ff !important;
+}
+
+.theme-msdos .preview .ant-segmented {
+  background: #000 !important;
+  border: 2px solid #9a9a9a !important;
+}
+
+.theme-msdos .preview .ant-segmented-item {
+  color: #c0c0c0 !important;
+  background: #000 !important;
+}
+
+.theme-msdos .preview .ant-segmented-item-selected {
+  background: #2a2a2a !important;
+  color: #f0f0f0 !important;
+  border-color: #c0c0c0 !important;
+}
+
+.theme-msdos .preview .ant-segmented-item-selected .ant-segmented-item-label {
+  color: #f0f0f0 !important;
+}
+
+.theme-msdos .preview .ant-segmented-item .ant-segmented-item-label {
+  color: #c0c0c0 !important;
+}
+
+.theme-msdos .preview .ant-tabs-tab {
+  background: #000 !important;
+}
+
+.theme-msdos .preview .ant-tabs-tab .ant-tabs-tab-btn {
+  color: #9a9a9a !important;
+}
+
+.theme-msdos .preview .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #f0f0f0 !important;
+}
+
+.theme-msdos .preview .ant-tabs-ink-bar {
+  background: #c0c0c0 !important;
+}
+
 .theme-msdos .preview .ant-input,
 .theme-msdos .preview .ant-input-affix-wrapper,
+.theme-msdos .preview .ant-input-number,
 .theme-msdos .preview .ant-select-selector,
 .theme-msdos .preview .ant-picker {
   background: #000 !important;
   color: #c0c0c0 !important;
   border: 3px solid #9a9a9a !important;
   box-shadow: none !important;
+}
+
+.theme-msdos .preview .ant-input-number .ant-input-number-input-wrap,
+.theme-msdos .preview .ant-input-number .ant-input-number-actions,
+.theme-msdos .preview .ant-input-number .ant-input-number-handler-wrap,
+.theme-msdos .preview .ant-input-number .ant-input-number-handler,
+.theme-msdos .preview .ant-input-number .ant-input-number-action,
+.theme-msdos .preview .ant-input-number .ant-input-number-action-up,
+.theme-msdos .preview .ant-input-number .ant-input-number-action-down,
+.theme-msdos .preview .ant-input-number .ant-input-number-handler::before,
+.theme-msdos .preview .ant-input-number .ant-input-number-handler::after,
+.theme-msdos .preview .ant-input-number .ant-input-number-action::before,
+.theme-msdos .preview .ant-input-number .ant-input-number-action::after {
+  border: none !important;
+  border-inline-start: 0 !important;
+  border-inline-end: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background-image: none !important;
+}
+
+.theme-msdos .preview .ant-input-number .ant-input-number-input {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
 }
 
 .theme-msdos .preview .ant-select {
@@ -1801,6 +2375,14 @@
   color: #c0c0c0 !important;
   border: 3px solid #7f7f7f !important;
   box-shadow: none !important;
+}
+
+.theme-msdos .preview .ant-picker-dropdown,
+.theme-msdos .preview .ant-picker-dropdown .ant-picker-panel-container,
+.theme-msdos .preview .ant-picker-dropdown .ant-picker-panel-layout {
+  width: max-content !important;
+  min-width: 0 !important;
+  max-width: max-content !important;
 }
 
 .theme-msdos .preview .ant-select-dropdown .ant-select-item,
@@ -1955,6 +2537,11 @@
   font-family: inherit;
 }
 
+.theme-crt .library-grid,
+.theme-msdos .library-grid {
+  grid-template-columns: 1fr !important;
+}
+
 .theme-msdos .controls h1,
 .theme-msdos .controls p,
 .theme-msdos .preview :is(h2, h3, p, li, td, th, dt, dd, summary, figcaption, caption) {
@@ -2002,6 +2589,18 @@
   color: #c0c0c0 !important;
 }
 
+.theme-msdos .MuiToggleButton-root {
+  background: #000 !important;
+  color: #c0c0c0 !important;
+  border-color: #9a9a9a !important;
+}
+
+.theme-msdos .MuiToggleButton-root.Mui-selected {
+  background: #2a2a2a !important;
+  color: #f0f0f0 !important;
+  border-color: #c0c0c0 !important;
+}
+
 .theme-msdos .preview .MuiRating-iconEmpty {
   color: #5a5a5a !important;
 }
@@ -2031,6 +2630,48 @@
   color: #c0c0c0 !important;
   border: 2px solid #9a9a9a !important;
   box-shadow: none !important;
+}
+
+.theme-msdos .preview .dropdown-menu,
+.theme-msdos .preview .dropdown-item,
+.theme-msdos .preview .accordion,
+.theme-msdos .preview .accordion-item,
+.theme-msdos .preview .accordion-header,
+.theme-msdos .preview .accordion-button,
+.theme-msdos .preview .accordion-body,
+.theme-msdos .preview .list-group-item {
+  background: #000 !important;
+  color: #c0c0c0 !important;
+  border-color: #9a9a9a !important;
+  box-shadow: none !important;
+}
+
+.theme-msdos .preview .dropdown-toggle,
+.theme-msdos .preview .dropdown-menu,
+.theme-msdos .preview .dropdown-item {
+  font-size: 16px !important;
+  line-height: 1.1 !important;
+}
+
+.theme-msdos .preview .dropdown-toggle {
+  padding: 0.25rem 0.55rem !important;
+}
+
+.theme-msdos .preview .dropdown-item {
+  padding: 0.2rem 0.5rem !important;
+}
+
+.theme-msdos .preview .dropdown-item:hover,
+.theme-msdos .preview .accordion-button:not(.collapsed),
+.theme-msdos .preview .list-group-item.active {
+  background: #2a2a2a !important;
+  color: #f0f0f0 !important;
+  border-color: #c0c0c0 !important;
+}
+
+.theme-msdos .preview .accordion {
+  --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23c0c0c0'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  --bs-accordion-btn-active-icon: var(--bs-accordion-btn-icon);
 }
 
 .theme-msdos .preview .headless-switch.off {

@@ -10,10 +10,19 @@ import {
   AccordionDetails,
   AccordionSummary,
   Alert,
+  Autocomplete,
+  Avatar,
+  Button,
+  ButtonGroup,
+  Checkbox,
   Chip,
   CircularProgress,
+  FormControlLabel,
+  FormGroup,
   LinearProgress,
   Rating,
+  Radio,
+  RadioGroup,
   MenuItem,
   FormControl,
   InputLabel,
@@ -22,29 +31,40 @@ import {
   Switch,
   Tab,
   Tabs,
+  ToggleButton,
+  ToggleButtonGroup,
   TextField,
   Typography,
 } from "@mui/material";
 import { ThemeProvider as MuiThemeProvider, createTheme } from "@mui/material/styles";
 import {
   Alert as AntAlert,
+  Checkbox as AntCheckbox,
   Button as AntButton,
   ConfigProvider as AntConfigProvider,
   DatePicker as AntDatePicker,
+  Divider as AntDivider,
   Input as AntInput,
+  InputNumber as AntInputNumber,
   Progress as AntProgress,
+  Radio as AntRadio,
   Select as AntSelect,
+  Segmented as AntSegmented,
   Slider as AntSlider,
   Switch as AntSwitch,
+  Tag as AntTag,
   Tabs as AntTabs,
 } from "antd";
 import type { ThemeConfig as AntThemeConfig } from "antd";
 import {
+  Accordion as RbAccordion,
   Alert as RbAlert,
   Badge as RbBadge,
   Button as RbButton,
   Card as RbCard,
+  Dropdown as RbDropdown,
   Form as RbForm,
+  ListGroup as RbListGroup,
   ProgressBar as RbProgressBar,
 } from "react-bootstrap";
 
@@ -59,8 +79,13 @@ function App() {
   const [muiRating, setMuiRating] = useState<number | null>(3);
   const [muiSlider, setMuiSlider] = useState<number>(40);
   const [muiSelect, setMuiSelect] = useState("beta");
+  const [muiAutoValue, setMuiAutoValue] = useState("Gamma");
+  const [muiRadio, setMuiRadio] = useState("alpha");
+  const [muiToggle, setMuiToggle] = useState("one");
   const [headlessEnabled, setHeadlessEnabled] = useState(true);
   const [antSlider, setAntSlider] = useState<number>(35);
+  const [antRadio, setAntRadio] = useState("alpha");
+  const [antSegment, setAntSegment] = useState("Alpha");
 
   const themeColors: Record<ThemeMode, { text: string; background: string }> = {
     default: { text: "#0f172a", background: "#e2e8f0" },
@@ -955,7 +980,38 @@ function App() {
                 <Chip label="Status chip" />
                 <Chip label="Clickable chip" clickable />
                 <Switch defaultChecked />
+                <Avatar sx={{ width: 26, height: 26 }}>M</Avatar>
               </div>
+              <ButtonGroup size="small" variant="outlined">
+                <Button>MUI One</Button>
+                <Button>Two</Button>
+                <Button>Three</Button>
+              </ButtonGroup>
+              <ToggleButtonGroup
+                size="small"
+                value={muiToggle}
+                exclusive
+                onChange={(_, value) => {
+                  if (value) setMuiToggle(value);
+                }}
+              >
+                <ToggleButton value="one">Mode One</ToggleButton>
+                <ToggleButton value="two">Mode Two</ToggleButton>
+                <ToggleButton value="three">Mode Three</ToggleButton>
+              </ToggleButtonGroup>
+              <FormGroup row>
+                <FormControlLabel control={<Checkbox defaultChecked />} label="MUI check A" />
+                <FormControlLabel control={<Checkbox />} label="MUI check B" />
+              </FormGroup>
+              <RadioGroup
+                row
+                value={muiRadio}
+                onChange={(event) => setMuiRadio(event.target.value)}
+              >
+                <FormControlLabel value="alpha" control={<Radio />} label="Alpha" />
+                <FormControlLabel value="beta" control={<Radio />} label="Beta" />
+                <FormControlLabel value="gamma" control={<Radio />} label="Gamma" />
+              </RadioGroup>
               <Accordion>
                 <AccordionSummary>
                   <Typography>Accordion title</Typography>
@@ -980,6 +1036,13 @@ function App() {
                   <MenuItem value="gamma">Gamma</MenuItem>
                 </Select>
               </FormControl>
+              <Autocomplete
+                size="small"
+                options={["Alpha", "Beta", "Gamma", "Delta"]}
+                value={muiAutoValue}
+                onChange={(_, value) => setMuiAutoValue(value ?? "Alpha")}
+                renderInput={(params) => <TextField {...params} label="MUI autocomplete" />}
+              />
               <div className="mui-row">
                 <label>
                   MUI slider
@@ -1014,8 +1077,34 @@ function App() {
                   <AntButton type="primary">Primary</AntButton>
                   <AntButton>Default</AntButton>
                   <AntSwitch defaultChecked />
+                  <AntTag>Tag</AntTag>
                 </div>
+                <div className="lib-row">
+                  <AntCheckbox defaultChecked>Ant check A</AntCheckbox>
+                  <AntCheckbox>Ant check B</AntCheckbox>
+                </div>
+                <AntRadio.Group
+                  value={antRadio}
+                  onChange={(event) => setAntRadio(event.target.value)}
+                  options={[
+                    { label: "Alpha", value: "alpha" },
+                    { label: "Beta", value: "beta" },
+                    { label: "Gamma", value: "gamma" },
+                  ]}
+                />
                 <AntInput placeholder="Antd input field" />
+                <AntInputNumber
+                  style={{ width: "100%" }}
+                  min={0}
+                  max={99}
+                  defaultValue={42}
+                />
+                <AntSegmented
+                  block
+                  value={antSegment}
+                  onChange={(value) => setAntSegment(String(value))}
+                  options={["Alpha", "Beta", "Gamma"]}
+                />
                 <AntSelect
                   defaultValue="beta"
                   getPopupContainer={(trigger) => trigger.parentElement ?? trigger}
@@ -1035,6 +1124,7 @@ function App() {
                   value={antSlider}
                   onChange={(value) => setAntSlider(value)}
                 />
+                <AntDivider style={{ margin: "8px 0" }} />
                 <AntProgress percent={72} />
                 <AntDatePicker
                   getPopupContainer={(trigger) => trigger.parentElement ?? trigger}
@@ -1050,11 +1140,42 @@ function App() {
               <div className="lib-row">
                 <RbButton variant="primary">Primary</RbButton>
                 <RbButton variant="outline-light">Outline</RbButton>
+                <RbDropdown>
+                  <RbDropdown.Toggle variant="outline-light" size="sm">
+                    Dropdown
+                  </RbDropdown.Toggle>
+                  <RbDropdown.Menu>
+                    <RbDropdown.Item href="#/action-1">Action</RbDropdown.Item>
+                    <RbDropdown.Item href="#/action-2">Another action</RbDropdown.Item>
+                    <RbDropdown.Item href="#/action-3">Something else</RbDropdown.Item>
+                  </RbDropdown.Menu>
+                </RbDropdown>
               </div>
               <RbForm.Group className="mb-2">
                 <RbForm.Label>RB input</RbForm.Label>
                 <RbForm.Control placeholder="Type with Bootstrap control" />
               </RbForm.Group>
+              <div className="rb-check-group">
+                <RbForm.Check
+                  className="rb-check-line"
+                  type="checkbox"
+                  label="RB check"
+                  defaultChecked
+                />
+                <RbForm.Check
+                  className="rb-check-line"
+                  type="radio"
+                  name="rb-radio"
+                  label="RB radio A"
+                  defaultChecked
+                />
+                <RbForm.Check
+                  className="rb-check-line"
+                  type="radio"
+                  name="rb-radio"
+                  label="RB radio B"
+                />
+              </div>
               <RbProgressBar now={68} label="68%" />
               <RbCard>
                 <RbCard.Body>
@@ -1064,6 +1185,17 @@ function App() {
                   </RbCard.Text>
                 </RbCard.Body>
               </RbCard>
+              <RbAccordion defaultActiveKey="0">
+                <RbAccordion.Item eventKey="0">
+                  <RbAccordion.Header>RB accordion</RbAccordion.Header>
+                  <RbAccordion.Body>Accordion body content for styling test.</RbAccordion.Body>
+                </RbAccordion.Item>
+              </RbAccordion>
+              <RbListGroup>
+                <RbListGroup.Item>Item One</RbListGroup.Item>
+                <RbListGroup.Item>Item Two</RbListGroup.Item>
+                <RbListGroup.Item>Item Three</RbListGroup.Item>
+              </RbListGroup>
             </section>
 
             <section className="lib-card card">
@@ -1080,6 +1212,21 @@ function App() {
                   </>
                 )}
               </Disclosure>
+              <Disclosure>
+                {({ open }) => (
+                  <>
+                    <Disclosure.Button className="headless-btn">
+                      {open ? "Hide advanced panel" : "Show advanced panel"}
+                    </Disclosure.Button>
+                    <Disclosure.Panel className="headless-panel">
+                      <div className="lib-row">
+                        <button type="button">Confirm</button>
+                        <button type="button">Cancel</button>
+                      </div>
+                    </Disclosure.Panel>
+                  </>
+                )}
+              </Disclosure>
               <Menu as="div" className="headless-menu">
                 <Menu.Button className="headless-btn">Menu</Menu.Button>
                 <Menu.Items anchor="bottom" className="headless-menu-items">
@@ -1091,6 +1238,9 @@ function App() {
                   </Menu.Item>
                   <Menu.Item>
                     <button type="button">Archive</button>
+                  </Menu.Item>
+                  <Menu.Item>
+                    <button type="button">Delete</button>
                   </Menu.Item>
                 </Menu.Items>
               </Menu>
