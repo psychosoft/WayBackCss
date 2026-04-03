@@ -1413,7 +1413,7 @@ function App() {
                 <RbButton variant="primary">Primary</RbButton>
                 <RbButton variant="outline-light">Outline</RbButton>
                 <RbDropdown>
-                  <RbDropdown.Toggle variant="outline-light" size="sm">
+                  <RbDropdown.Toggle variant="outline-light">
                     Dropdown
                   </RbDropdown.Toggle>
                   <RbDropdown.Menu>
